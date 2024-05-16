@@ -3,6 +3,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Bed files
+bed/
+downloads/
+
+# secret configuration files
+*.secret
+
+# database dumps
+*.sql
+
 # C extensions
 *.so
 

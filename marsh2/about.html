@@ -1,0 +1,265 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/chosen.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src='js/chosen.jquery.min.js'></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170462018-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170462018-1');
+    </script>
+    <title>About - Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.img_container {
+    width: 1366px;
+    height: 320px;
+    border-bottom: 4px solid #666;
+}
+
+.img_tagline {
+    margin-top: 10px;
+}
+
+.header_panel {
+    width: 340px;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.info_panel {
+    width: 340px;
+    height: 220px;
+    float: left;
+    text-align: justify;
+}
+
+.header_pic {
+    margin-top: 20px;
+}
+
+.info_container {
+    width: 1366px;
+    float: left;
+    height: 190px;
+    background-color: #ff9999;
+    border-bottom: 4px solid #666;
+    overflow: hidden;
+}
+
+.info_link {
+    background-color: #666;
+    border: 3px solid #666;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    position: absolute;
+    bottom: -30;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 200;
+    cursor: pointer;
+    font-size: 12px;
+    /*    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+.main_textarea {
+    height: 650px;
+    width: 500px;
+    background-color: #ddd;
+    border: 2px solid #666;
+    margin: 10px;
+    float: left;
+    margin-top: 50px;
+}
+
+#description {
+    height: 650px;
+    margin-left: 50px;
+    float: left;
+    margin-top: 32px;
+    text-align: justify;
+    width: 600px;
+    line-height: 10mm;
+}
+
+#text_desc {
+    width: 500px;
+    text-align: justify;
+    line-height: 8mm;
+}
+
+.big_bad_button {
+    background-color: #FF9999;
+    border: none;
+    height: 20px;
+    float: left;
+    margin: 30px;
+    margin-left: 0;
+    padding: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1mm;
+    color: white;
+    cursor: pointer;
+}
+
+#form_data {
+    height: 500px;
+    margin-left: 150px;
+    float: left;
+    margin-top: 50px;
+    width: 500px;
+}
+
+a {
+    color: #FF9999;
+    font-weight: 500;
+}
+
+.text_bar_input {
+    width: 300px;
+    height: 20px;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+</style>
+
+<body>
+    <div class='main' style='width:1366px;height:768px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='/'>
+                <img src='img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER </h1></a>
+            <a class='header_link' target='_blank' href='/about.html'> About </a>
+            <a class='header_link' target='_blank' href='/downloads.html'> Downloads </a>
+            <a class='header_link' href='/'> Home </a>
+        </header>
+        <div id='description'>
+            <h2>Citation</h2>
+            <p><a href='https://www.nature.com/articles/nmeth.4540' target='_blank'>Interactome INSIDER: a structural interactome browser for genomic studies.</a> MJ Meyer, JF Beltrán, S Liang, R Fragoza, A Rumack, J Liang, X Wei, H Yu - Nature Methods, 2018</a><br><br>
+            </p>
+            <h2>About</h2>
+            <p> <b>Interactome INSIDER (INtegrated Structural Interactome and genomic Data browsER)</b> is a integrative structural and genomic information center for functional exploration of human disease mutations using the first structurally resolved, multi-scale, proteome-wide human interactome. 
+                Interactome INSIDER compiles mutations/variants from <a href='http://www.hgmd.cf.ac.uk/ac/index.php' target='_blank'>HGMD</a>, <a href='https://www.ncbi.nlm.nih.gov/clinvar/' target='_blank'>ClinVar</a>, <a href='http://cancer.sanger.ac.uk/cosmic' target='_blank'>COSMIC</a>, <a href='http://www.internationalgenome.org/' target='_blank'>1000 Genomes</a>, <a href='http://evs.gs.washington.edu/EVS/' target='_blank'>ESP</a> and others. It allows users to find enrichment of disease mutations from these databases and from user uploads in protein interaction domains, residues, and through atomic 3D clustering in protein interfaces.
+                <br>
+                <br> In order to study disease on a genomic scale, we built an interactome-wide set of protein interaction interfaces by calculating interfaces in experimental co-crystal structures and homology models when available. For the remaining ~94% of interactions, we applied a new, unified framework, ECLAIR (Ensemble Classifier Learning Algorithm to predict Interface Residues) to predict the interfaces by applying recent advances in partner-specific interface prediction, such as co-evolution- and docking-based feature construction. We used ECLAIR to predict protein interaction interfaces in the full human interactome and for 7 highly studied model organisms (<i>D. melanogaster</i>, <i>S. cerevisiae</i>, <i>C. elegans</i>, <i>A. thaliana</i>, <i>E. coli</i>, <i>S. pombe</i>, and <i>M. musculus</i>). Specifically for human, Interactome INSIDER contains interface information for 121,575 experimentally-determined binary interactions reported in major databases.
+                <br>
+                <br> ECLAIR is a model that uses ensemble of 8 random forest classifiers to predict interface residues by using as much information as possible in each of its predictions. ECLAIR can leverage sequence information, conservation, coevolution, structural models, and molecular docking results in such a way that it avoids the non-random missing feature problem. Through this ensemble of classifiers, ECLAIR can predict interface residues for any protein-protein interaction.
+            </p>
+            <h2>Contact</h2>
+            <p>Please contact <a href='sg2442@cornell.edu'>sg2442@cornell.edu</a> for any issues or requests for the website.
+            </p>
+            
+        </div>
+</body>
+<script>
+$(document).ready(function() {
+    console.log('Alive.');
+});
+</script>

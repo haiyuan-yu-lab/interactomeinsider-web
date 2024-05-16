@@ -1,0 +1,296 @@
+#!/usr/bin/env /data/conda-marshmallow/bin/python
+
+import sys
+import os
+import cgi
+sys.stderr = sys.stdout
+import cgitb
+cgitb.enable()
+import random
+import string
+
+
+def generate_code():
+    return ''.join(['MC'] + random.sample(string.uppercase, 3) + random.sample(string.digits, 2) + random.sample(string.letters + string.digits, 5))
+
+#Grab all the inputs from CGI
+form = cgi.FieldStorage()
+fh = form['mutation_file']
+
+group_name = form.getfirst('disease_group_name')
+user_name = generate_code()
+email = form['email'].value if "email" in form else ''
+
+prefix = '/data/web-vhosts/marsh2/cgi-bin/LOR_calculation/'
+
+
+filename = prefix + user_name + '_' + group_name + '.txt'
+efilename = prefix + user_name + '_' + group_name + '_email.txt'
+
+
+with open(filename, 'w') as f:
+    text = fh.file.read()
+    if("," in text and not "\t" in text):
+        f.write(text.replace(',',' '))
+    else:
+        f.write(text.replace('\t',' '))
+
+with open(efilename, 'w') as f:
+    f.write(email)
+
+
+os.system("/data/conda-marshmallow/bin/python /data/web-vhosts/marsh2/cgi-bin/LOR_calculation/LOR_add.py {0} {1} & ".format(user_name, group_name))
+
+
+output =  """
+<head>
+    <link rel="icon" href="../img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../js/chosen.min.css">
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src='../js/chosen.jquery.min.js'></script>
+    <title>Success - Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.img_container {
+    width: 1366px;
+    height: 320px;
+    border-bottom: 4px solid #666;
+}
+
+.img_tagline {
+    margin-top: 10px;
+}
+
+.header_panel {
+    width: 340px;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.info_panel {
+    width: 340px;
+    height: 220px;
+    float: left;
+    text-align: justify;
+}
+
+.header_pic {
+    margin-top: 20px;
+}
+
+.info_container {
+    width: 1366px;
+    float: left;
+    height: 190px;
+    background-color: #ff9999;
+    border-bottom: 4px solid #666;
+    overflow: hidden;
+}
+
+.info_link {
+    background-color: #666;
+    border: 3px solid #666;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    position: absolute;
+    bottom: -30;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 200;
+    cursor: pointer;
+    font-size: 12px;
+    /*    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+.main_textarea {
+    height: 500px;
+    width: 500px;
+    background-color: #ddd;
+    border: 2px solid #666;
+    margin: 10px;
+    float: left;
+    margin-top: 50px;
+}
+
+#description {
+    height: 500px;
+    margin-left: 50px;
+    float: left;
+    margin-top: 50px;
+}
+
+#text_desc {
+    width: 500px;
+    text-align: justify;
+    line-height: 8mm;
+}
+
+.big_bad_button {
+    background-color: #FF9999;
+    border: none;
+    height: 20px;
+    float: left;
+    margin: 30px;
+    margin-left: 0;
+    padding: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1mm;
+    color: white;
+    cursor: pointer;
+}
+
+#form_data {
+    height: 500px;
+    margin-left: 150px;
+    float: left;
+    margin-top: 50px;
+    width: 500px;
+}
+
+a {
+    color: #FF9999;
+    font-weight: 500;
+}
+
+.text_bar_input {
+    width: 300px;
+    height: 20px;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+</style>
+
+<body>
+    <div class='main' style='width:1366px;height:768px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='http://interactomeinsider.yulab.org/'>
+                <img src='../img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER </h1></a>
+            <a class='header_link' target='_blank' href='http://interactomeinsider.yulab.org/about.html'> About </a>
+            <a class='header_link' target='_blank' href='http://interactomeinsider.yulab.org/downloads.html'> Downloads </a>
+            <a class='header_link' href='http://interactomeinsider.yulab.org/'> Home </a>
+        </header>
+        <div id='description'>
+            <h2> Mutation Successfully Submitted</h2>
+            <div id='text_desc'>
+                Your mutation set is now being processed on our server. If you selected an email address for notification, you will be contacted once the calculations are done. Once the calculations are done, your data should be available under the mutation code <b>""" + \
+    user_name + \
+    """</b>
+            </div>
+        </div>
+</body>
+<script>
+
+</script>
+</html>
+"""
+print "Content-type: text/html"
+print 'Content-length: ', str(len(output))
+print 'Cache-Control: ', 'no-cache\n\n'
+print output
+
+sys.exit(0)

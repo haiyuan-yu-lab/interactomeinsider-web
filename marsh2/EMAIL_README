@@ -1,0 +1,16 @@
+At least the following locations must be modified to change the recipient of email logs for INSIDER...
+
+./about.html
+./mutations.html
+./cgi-bin/LOR_calculation/LOR_from_user_input.py
+./cgi-bin/LOR_calculation/LOR_add.py
+./cgi-bin/LOR_calculation/LOR_add.py1112
+./cgi-bin/LOR_calculation/LOR_from_user_input.py1112
+./cgi-bin/mutation_handler.cgi
+
+Email recipient history...
+
+- Juan Beltran (jfb294): Creation --> 2018_07
+- Snigdha Mahapatra (snighda@cornell.edu): 2018_07 --> 2019_01
+- Shayne Wierbowski (sdw95@cornell.edu): 2019_01 --> 2022_04
+- Shobhita Gupta (sg2442@cornell.edu): 2022_04 --> Present

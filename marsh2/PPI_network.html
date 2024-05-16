@@ -1,0 +1,1094 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/chosen.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src='js/chosen.jquery.min.js'></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170462018-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170462018-1');
+    </script>
+    <title>Network - Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.link {
+    stroke-width: 2.0px;
+}
+
+.node {
+    stroke-width: 0;
+}
+
+.node.fixed {
+    fill: #f00;
+}
+
+.res {
+    height: 20;
+    width: 20;
+    border-radius: 50px;
+    margin: auto;
+}
+
+.pdb_decorator {
+    background-color: #339933;
+    border-color: #339933;
+    height: 20px;
+}
+
+.i3d_decorator {
+    background-color: #99cc99;
+    border-color: #99cc99;
+    height: 20px;
+}
+
+.zdk_decorator {
+    background-color: #7DE894;
+    border-color: #7DE894;
+    height: 20px;
+}
+
+.eclair_decorator {
+    background-color: #99cccc;
+    border-color: #99cccc;
+    height: 20px;
+}
+
+#network_div {
+    float: left;
+    width: 880px;
+    height: 768px;
+    border-left: 4px solid #666;
+    position: relative;
+}
+
+.evidence {
+    float: right;
+    font-size: 10px;
+    padding: 2px;
+    margin: 0;
+    text-decoration: none;
+    pointer-events: none;
+    width: 40px;
+}
+
+.list-group-item {
+    border: 1px solid lavender;
+}
+
+.btn-default {
+    background-color: lavender;
+    border: 1px solid lavender;
+}
+
+a.list-group-item:hover {
+    background-color: lavender;
+}
+
+.node text {
+    display: inline;
+    font: 10px sans-serif;
+    text-anchor: middle;
+}
+
+.node:hover circle {
+    opacity: 0.9;
+    r: 6.5;
+}
+
+.node:hover text {
+    display: inline;
+    font: 16px sans-serif;
+    color: white;
+    line-height: 10mm;
+}
+
+.cell {
+    fill: none;
+    pointer-events: all;
+    /*    stroke-width:2px;
+    stroke: red !important;*/
+}
+
+.main {
+    border-bottom: 4px solid #666;
+    height: 844px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#interaction_div::-webkit-scrollbar:vertical {
+    display: block !important;
+    background-color: #ddd;
+    border-left: 1px solid #ccc;
+}
+
+#interaction_div::-webkit-scrollbar-thumb {
+    display: block !important;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+#disease_div::-webkit-scrollbar:vertical {
+    display: block !important;
+    background-color: #ddd;
+    border-left: 1px solid #ccc;
+}
+
+#disease_div::-webkit-scrollbar-thumb {
+    display: block !important;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.highlighted_node {
+    fill: #ff3333 !important;
+    opacity: 1.0 !important;
+}
+
+.highlighted_edge {
+    fill: #ff9999 !important;
+    opacity: 1.0 !important;
+}
+
+.disease_list {
+    width: 240;
+    height: 768px;
+    float: left;
+    border-left: 4px solid #666;
+}
+
+.list_header {
+    height: 20px;
+    text-align: center;
+    font-weight: 500;
+    border-bottom: 2px solid #666;
+    padding-bottom: 30px;
+    margin-bottom: 0px;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.db_name {
+    font-weight: 400;
+    line-height: 8mm;
+}
+
+.disease_name {
+    color: #666;
+    font-size: 11px;
+    margin-top: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 4mm;
+}
+
+.disease_item {
+    cursor: pointer;
+}
+
+.selected_list_item {
+    color: white !important;
+    background-color: #ff9999 !important;
+}
+
+.selected_list_item .member_count {
+    color: red !important;
+}
+
+.member_count {
+    float: right;
+    font-weight: 400;
+    line-height: 8mm;
+}
+
+.big_line {
+    stroke-width: 4px !important;
+    opacity: 1.0 !important;
+}
+
+.big_line:hover {
+    stroke-width: 5px !important;
+    stroke: red !important;
+}
+
+.invisible {
+    stroke-width: 0px;
+}
+
+.selected_disease_name {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.pinked {
+    opacity: 1.0 !important;
+    stroke: #ff9999 !important;
+}
+
+.net_loader {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    left: 350;
+    top: 300;
+}
+
+.radio_holder {
+    margin: 0;
+    width: 50%;
+    float: left;
+}
+
+.hidden_by_search {
+    display: none !important;
+}
+
+.main_node text {
+    font-weight: 800;
+    font-size: 13px;
+}
+</style>
+<script>
+function filter_diseases(descriptor) {
+    if (descriptor == 'All') {
+        $('.disease_item').show();
+    } else {
+        $('.disease_item').hide();
+        $('.' + descriptor).show();
+    }
+}
+</script>
+
+<body>
+    <div class='main' style='width:1366px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='/'>
+                <img src='img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER </h1></a>
+            <a class='header_link' target='_blank' href='/about.html'> About </a>
+            <a class='header_link' target='_blank' href='/downloads.html'> Downloads </a>
+            <a class='header_link' href='/'> Home </a>
+        </header>
+        <div class="interaction_list" style="width:240px; float:left">
+            <h5 class='list_header'> View Interactions </h5>
+            <div id='interaction_text_filter' style="padding-top:4px; height: 30px;border-left: 2px solid #ccc;border-bottom: 2px solid #ccc">
+                <input style='margin:0;border:none;width:100%; padding-left:10px' id='interaction_search' type="search" name="" value="" placeholder="Search for Interaction">
+            </div>
+            <div id="interaction_div" class="list-group table-of-contents" style="height: 696px; overflow:scroll">
+            </div>
+            <!-- end of list group -->
+        </div>
+        <div id="network_div">
+            <div style="height:120px; width:300px; background-color:none; border-radius:5px;padding:20px;position:absolute;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="pdb_decorator" style="display:inline; color:white; padding:2px;float:right;width:40px; font-size:10px; text-decoration:none;text-align:center">PDB</td>
+                            <td style="padding-left:10px;height:30px; vertical-align:-webkit-baseline-middle; padding-top:2px;"> Co-crystal Interface Available </td>
+                        </tr>
+                        <tr>
+                            <td class="i3d_decorator" style="display:inline; color:white; padding:2px;float:right;width:40px; font-size:10px; text-decoration:none;text-align:center">I3D</td>
+                            <td style="padding-left:10px;height:30px; vertical-align:-webkit-baseline-middle; padding-top:2px;"> Homology Model Available</td>
+                        </tr>
+                        <tr>
+                            <td class="eclair_decorator" style="display:inline; color:white; padding:2px;float:right;width:40px; font-size:10px; text-decoration:none;text-align:center">ECLAIR</td>
+                            <td style="padding-left:10px;height:30px; vertical-align:-webkit-baseline-middle; padding-top:2px;"> Predicted Interface</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id='enrichment_tagline' style="height:118px; width:725px; background-color:white; border-radius:5px;padding:20px;position:absolute; right:73; bottom:-4px; border:3px solid #666; text-align:center; color:#ff9999; font-size:14px; font-weight:500;display:none ">
+                <span class='selected_disease_name'></span>
+                <br>
+                <br> Pink edge thickness corresponds to enrichment of disease mutations at the protein interaction interface.
+            </div>
+            <div id='enrichment_error' style="height:118px; width:725px; background-color:white; border-radius:5px;padding:20px;position:absolute; right:73; bottom:-55px; border:3px solid #666; text-align:center; color:#999999; font-size:10px; font-weight:500;display:none ">
+                No enriched interfaces for the given disease
+                <br><span class='selected_disease_name'></span>
+            </div>
+            <div id='clear_network' style="display:none; height:80px; width:200px; background-color:none; border-radius:5px;padding:20px;position:absolute; right:0; top:0;text-align:center; color:white; font-size:12px; font-weight:500;z-index:500;">
+                <button onclick='returnToFullNetwork()' style='background-color:#ff9999; border:none; border-radius:4px;'> CLEAR NETWORK </button>
+            </div>
+            <img class='net_loader' src='img/loader.gif' />
+            <svg id="d3_network_container" style="width: 100%; height: 765px; margin: 0px; padding: 0px; position:relative; display:none;">
+            </svg>
+        </div>
+        <div class='disease_list'>
+            <h5 class='list_header'> Highlight Disease Mutations </h5>
+            <div id='disease_filter' style="padding-top:4px; height: 52px;border-right: 2px solid #ccc;border-bottom: 2px solid #ccc">
+                <div class='radio_holder'>
+                    <input style="margin-left:10px; margin-right:10px" type="radio" name="db_select" value="All" placeholder="" checked onclick="filter_diseases('All')"> All </div>
+                <div class='radio_holder'>
+                    <input style="margin-left:10px; margin-right:10px" type="radio" name="db_select" value="HGMD" placeholder="" onclick="filter_diseases('HGMD')"> HGMD </div>
+                <div class='radio_holder'>
+                    <input style="margin-left:10px; margin-right:10px" type="radio" name="db_select" value="ClinVar" placeholder="" onclick="filter_diseases('ClinVar')"> ClinVar </div>
+                <div class='radio_holder'>
+                    <input style="margin-left:10px; margin-right:10px" type="radio" name="db_select" value="COSMIC" placeholder="" onclick="filter_diseases('COSMIC')"> COSMIC </div>
+            </div>
+            <div id='disease_text_filter' style="padding-top:4px; height: 30px;border-right: 2px solid #ccc;border-bottom: 2px solid #ccc">
+                <input style='margin:0;border:none;width:100%; padding-left:10px' id='disease_search' type="search" name="" value="" placeholder="Search for Disease">
+            </div>
+            <div id="disease_div" class="list-group table-of-contents" style="height: 640px; overflow:scroll">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+var double_interactome = true;
+var timeOuts = [];
+var displaying = [];
+var displaying_interactions = [];
+var index_to_disease = {};
+var disease_to_index = {};
+var interaction_network_data;
+
+
+function draw_interaction_network2(organism, identifiers) {
+    $.ajax({
+        type: 'POST',
+        data: {
+            organism: organism,
+            identifiers: identifiers
+        },
+        url: '/cgi-bin/api.py/localNetwork',
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            var new_element = $("<a class='list-group-item noselect interactor_item' id='interaction_failure style='height:40px; top:-200px'> No Interactors </a>");
+            new_element.appendTo('#interaction_div').animate({
+                'top': 0,
+                'background-color': '#e7e7e7'
+            }, 200);
+            new_element.animate({
+                'z-index': 0
+            });
+            $('#network_div').html('<h3 style="margin:auto; margin-top:100px; padding:20px; background-color:#666; color:white; font-size:20px; text-align:center"> No interactors found for that identifier. Please adjust your query and try again. <br><br>For best results, prefer uniprot identifiers over gene names.</h3>');
+            return;
+        },
+        success: function(result) {
+            json = JSON.parse(result);
+            interaction_network_data = json;
+            console.log(json);
+
+            $('#interaction_div').children().fadeOut().remove();
+            if (json === null) {
+                var new_element = $("<a class='list-group-item noselect interactor_item' id='interaction_failure style='height:40px; top:-200px'> No Interactors </a>");
+                new_element.appendTo('#interaction_div').animate({
+                    'top': 0,
+                    'background-color': '#e7e7e7'
+                }, 200);
+                new_element.animate({
+                    'z-index': 0
+                });
+                $('#network_div').html('<h3 style="margin:auto; margin-top:100px; padding:20px; background-color:#666; color:white; font-size:20px; text-align:center"> No interactors found for that identifier. Please adjust your query and try again. <br><br>For best results, prefer uniprot identifiers over gene names.</h3>');
+                return;
+            } else {
+
+                $.each(json.links, function(index, val) {
+                    // if (!(json.nodes[val.target].main || json.nodes[val.source].main)) {
+                    //     return true;
+                    // }
+
+                    source = json.nodes[val.source];
+                    target = json.nodes[val.target];
+
+                    var hoverFunc = 'onmouseover="selectNodes([' + "'" +
+                        (json.query.indexOf(val.Gene_A) != -1 ? '' : val.Gene_A) + "','" +
+                        (json.query.indexOf(val.Gene_B) != -1 ? '' : val.Gene_B) + "'" + '])"';
+                    var unhoverFunc = 'onmouseout="unSelectNodes()"';
+
+
+                    var new_element_str;
+                    if (val.evidence == 'ECLAIR') {
+
+                        new_element_str = "<a target='_blank' " + hoverFunc + ' ' + unhoverFunc + " class='noselect list-group-item interactor_item' id='interaction_" + val.interaction +
+                            "' style='height:40px;z-index:-" + index + "; top:-" + (60 * (index + 1)) + "px' href='/PPI_pair.html?interaction=" + val.Uniprot_A + '_' + val.Uniprot_B + '&mutcode=' + mutcode + "'>" + val.Gene_A + ' - ' + val.Gene_B;
+
+                    } else {
+
+                        new_element_str = "<a target='_blank' " + hoverFunc + ' ' + unhoverFunc + " class='list-group-item interactor_item' id='interaction_" + val.interaction +
+                            "' style='height:40px;z-index:-" + index + "; top:-" + (60 * (index + 1)) + "px' href='/PPI_pair.html?interaction=" + val.Uniprot_A + '_' + val.Uniprot_B + '&mutcode=' + mutcode + "'>" + val.Gene_A + ' - ' + val.Gene_B;
+
+                    }
+
+                    new_element_str += "<button class='btn btn-success evidence " + val.evidence.toLowerCase() +
+                        "_decorator'>" + val.evidence +
+                        "</button>";
+
+
+
+
+                    new_element_str += "</a>";
+                    new_element = $(new_element_str);
+                    new_element.appendTo('#interaction_div').animate({
+                        'top': 0
+                    }, (1000 - index));
+                    new_element.animate({
+                        'z-index': 0
+                    });
+
+
+
+                });
+            }
+
+
+
+            // INTERACTION NETWORK d3JS CODE
+
+            var margin = {
+                top: 50,
+                right: 0,
+                bottom: 100,
+                left: 0
+            };
+
+
+            $.each(json.nodes, function(i, n) {
+                displaying.push(n.uniprot);
+            })
+
+            var width = $("#network_div").width() - margin.left - margin.right,
+                height = $("#network_div").height() - margin.top - margin.bottom;
+
+            network_svg = d3.select("#d3_network_container")
+                .append('g')
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            pink_link_svg = network_svg
+                .append('g');
+
+
+            link_svg = network_svg
+                .append('g');
+
+
+            node_svg = network_svg
+                .append('g');
+
+            pink_link_svg.style('z-index', '20');
+
+            link_svg.style('z-index', '50');
+
+            node_svg.style('z-index', '100');
+
+            force = d3.layout.force()
+                .gravity(0.8)
+                .charge(-700)
+                .linkDistance(function(d) {
+                    return d.linkDistance;
+                })
+                .theta(0.1)
+                .size([width, height]);
+
+            var voronoi = d3.geom.voronoi()
+                .x(function(d) {
+                    return d.x;
+                })
+                .y(function(d) {
+                    return d.y;
+                })
+                .clipExtent([
+                    [0, -200],
+                    [width + 200, height + 200]
+                ]);
+
+            links = [];
+            nodes = [];
+            links = links.concat(json.links);
+            nodes = nodes.concat(json.nodes);
+
+            force
+                .nodes(nodes)
+                .links(links)
+                .start();
+
+            node = node_svg.selectAll(".node")
+                .data(nodes);
+
+            node.enter().append("g")
+                .attr("class", function(d) {
+                    return "node " + (d.main == true ? 'main_node' : '');
+                })
+                .attr("id", function(d) {
+                    return d.name
+                })
+                .style('fill', "#666")
+                .call(force.drag);
+
+            node
+                .attr("cx", function(d) {
+                    d.x = width / 2 + Math.round((Math.random() - 0.5) * 500);
+                    d.y = height / 2 + Math.round((Math.random() - 0.5) * 500);
+                });
+
+
+            link = link_svg.selectAll(".link")
+                .data(links);
+
+            pink_link = pink_link_svg.selectAll(".link")
+                .data(links);
+
+            link.enter().append("line")
+                .attr("class", "link")
+                .attr("class", function(d) {
+                    return d.source.name + '_edge' + ' ' + d.target.name + '_edge' + ' link';
+                })
+                .style('stroke', function(d) {
+                    return d.stroke;
+                })
+                .style('opacity', function(d) {
+                    return d.opacity;
+                })
+                .attr("id", function(d) {
+                    inters = [d.source.uniprot, d.target.uniprot]
+                    inters.sort()
+                    interaction = inters.join('_')
+                    displaying_interactions.push(interaction)
+                    return interaction
+                });
+
+            pink_link.enter().append("line")
+                .attr("class", "link")
+                .attr("class", function(d) {
+                    return d.source.name + '_edge' + ' ' + d.target.name + '_edge' + ' link';
+                })
+                .style('stroke', "#99FFFF")
+                .style('opacity', 0.0)
+                .attr("id", function(d) {
+                    inters = [d.source.uniprot, d.target.uniprot]
+                    inters.sort()
+                    interaction = inters.join('_')
+                    return 'pink_' + interaction
+                });
+
+            var circle = node.append("circle")
+                .attr("r", 4.5);
+
+
+            var label = node.append("text")
+                .attr("dy", "1.5em")
+                .text(function(d) {
+                    return d.name;
+                });
+
+
+            var cell = node.append("path")
+                .attr("class", "cell")
+                .on('mouseover', function(d) {
+                    selectNodes([d.point.name]);
+                });
+
+            force.on("tick", function() {
+
+
+                cell
+                    .data(voronoi(json.nodes))
+                    .attr("d", function(d) {
+                        return d.length ? "M" + d.join("L") : null;
+                    });
+
+
+
+                circle
+                    .attr("cx", function(d) {
+                        return d.x;
+                    })
+                    .attr("cy", function(d) {
+                        return d.y;
+                    });
+
+                label
+                    .attr("x", function(d) {
+                        return d.x;
+                    })
+                    .attr("y", function(d) {
+                        return d.y;
+                    });
+
+                link
+                    .attr("x1", function(d) {
+                        return d.source.x;
+                    })
+                    .attr("y1", function(d) {
+                        return d.source.y;
+                    })
+                    .attr("x2", function(d) {
+                        return d.target.x;
+                    })
+                    .attr("y2", function(d) {
+                        return d.target.y;
+                    });
+
+                pink_link
+                    .attr("x1", function(d) {
+                        return d.source.x;
+                    })
+                    .attr("y1", function(d) {
+                        return d.source.y;
+                    })
+                    .attr("x2", function(d) {
+                        return d.target.x;
+                    })
+                    .attr("y2", function(d) {
+                        return d.target.y;
+                    });
+
+
+            });
+
+            getDiseases();
+
+
+            $('.net_loader').fadeOut('slow');
+
+            setTimeout($('#d3_network_container').fadeIn('slow'), 2000);
+
+
+        }
+    });
+}
+
+
+
+function start() {
+    force.links(links);
+
+    link = link_svg.selectAll(".link")
+        .data(links);
+
+    link.enter().append("line")
+        .attr("class", "link")
+        .style("stroke", "lavender")
+        .attr("id", function(d) {
+            if (d.source.uniprot === undefined) {
+                inters = [nodes[d.source].uniprot, nodes[d.target].uniprot];
+            } else {
+                inters = [d.source.uniprot, d.target.uniprot];
+            }
+            inters.sort()
+            interaction = inters.join('_')
+            displaying_interactions.push(interaction)
+            return interaction
+        })
+        .attr("class", function(d) {
+            if (d.source.name === undefined) {
+                return nodes[d.source].name + '_edge ' + nodes[d.target].name + '_edge' + ' link';
+            } else {
+                return d.source.name + '_edge ' + d.target.name + '_edge' + ' link';
+            }
+        });
+
+
+
+    link.exit().remove();
+
+    force
+        .nodes(nodes)
+        .links(links)
+        .start();
+
+}
+
+
+var diseases;
+var mutcode = '';
+
+function getDiseases() {
+    $('#disease_div').html('');
+    $.ajax({
+        type: 'POST',
+        data: {
+            members: displaying.join(),
+            mutcode: mutcode
+        },
+        url: '/cgi-bin/api.py/diseaseNetwork',
+        success: function(result) {
+            diseases = JSON.parse(result);
+            var index = 0
+            $.each([mutcode, 'HGMD', 'ClinVar', 'COSMIC'], function(db_index, db) {
+                if (!(db in diseases)) {
+                    console.log(db + ' not in diseases.')
+                    return null;
+                }
+                dis = diseases[db];
+                var keys = [];
+                $.each(dis, function(disease, members) {
+                    keys.push(disease);
+                });
+                keys.sort()
+                var append_queue = [];
+                $.each(keys, function(i, disease) {
+
+                    hoverFunc = 'onmouseover="selectDisease(' + "'" + db + "', " + "'" + disease + "'," + index + ')"';
+                    clickFunc = 'onclick="getEnrichmentNetwork(' + "'" + db + "', " + "'" + disease + "'," + index + ')"';
+
+                    on_net = 0;
+                    $.each(dis[disease], function(i, identifier) {
+                        if (identifier.indexOf('/') !== -1) {
+                            on_net += $('#' + identifier.split('/')[0]).length;
+                            on_net += $('#' + identifier.split('/')[1]).length;
+                        } else {
+                            on_net += $('#' + identifier).length;
+                        }
+                    });
+
+                    append_queue.push({
+                        'on_net': on_net,
+                        "hoverFunc": hoverFunc,
+                        "clickFunc": clickFunc,
+                        "i": i,
+                        'index': index,
+                        'disease': disease,
+                        'db': db
+                    })
+
+                    index++;
+
+                });
+
+
+                // append_queue.sort(function(a, b) {
+                //     return parseFloat(a.on_net) - parseFloat(b.on_net);
+                // });
+                // append_queue.reverse();
+
+                $.each(append_queue, function(q_index, q) {
+                    new_element_str = "<a target='_blank' " + q.hoverFunc + ' ' + q.clickFunc + " class='noselect list-group-item disease_item " + q.db + "' id='dis_" + q.index + "' style='height:120px;z-index:-" + q.index + "; top:-" + (60 * (q.index + 1)) + "px'><span class='db_name'>" + q.db + '</span> <span class="member_count"> (' + q.on_net + ' gene' + (q.on_net > 1 ? 's' : '') + ')</span><br> <span class="disease_name">' + q.disease + '</span></a>';
+
+                    new_element = $(new_element_str);
+                    new_element.appendTo('#disease_div').animate({
+                        'top': 0
+                    }, (2000 - q.index));
+                    new_element.animate({
+                        'z-index': 0
+                    });
+                    index_to_disease[q.index] = q.disease;
+                    disease_to_index[q.db + '_' + q.disease] = q.index;
+                });
+            });
+        }
+    });
+}
+
+var enrichment_network;
+
+function getEnrichmentNetwork(source, disease, index) {
+    $.ajax({
+        type: 'POST',
+        data: {
+            interactions: displaying_interactions.join(','),
+            source: source,
+            disease: disease
+        },
+        url: '/cgi-bin/api.py/enrichmentNetwork',
+        success: function(result) {
+            enrichment_network = JSON.parse(result);
+
+            d3.selectAll('.link').classed('invisible', false);
+            d3.selectAll('.link').classed('pinked', false);
+            d3.selectAll('.link').style('stroke-weight', 2);
+            if (enrichment_network !== null) {
+
+                $.each(enrichment_network, function(interaction, holder) {
+                    LOR = holder.LOR;
+                    targeted = d3.select('#pink_' + interaction);
+                    targeted.classed('invisible', false);
+                    targeted.style('stroke-width', 1 + LOR / 2.0);
+                    targeted.classed('pinked', true);
+                    targeted = d3.select('#' + interaction);
+                    targeted.classed('invisible', false);
+                });
+                $('#enrichment_tagline').hide();
+                $('#enrichment_error').hide();
+                $('#enrichment_tagline').fadeIn();
+                $('#clear_network').fadeIn()
+                $('.selected_disease_name').html(disease);
+            } else {
+                $('#enrichment_tagline').hide();
+                $('#enrichment_error').hide();
+                $('#enrichment_error').fadeIn();
+                $('#clear_network').fadeIn()
+                $('.selected_disease_name').html(disease);
+            }
+        }
+    });
+}
+
+function returnToFullNetwork() {
+    d3.selectAll('.link').classed('invisible', false)
+        .classed('pinked', false)
+        .style('stroke-width', 2);
+    d3.selectAll('.node').classed('highlighted_node', false);
+    $('#enrichment_tagline').fadeOut();
+    $('#enrichment_error').fadeOut();
+    $('#clear_network').fadeOut();
+    $('.selected_list_item').removeClass('selected_list_item');
+}
+
+function selectDisease(db, disease, index) {
+    $('.selected_list_item').removeClass('selected_list_item');
+    $('#dis_' + index).addClass('selected_list_item');
+    d3.selectAll('.node').classed('highlighted_node', false);
+    $.each(diseases[db][disease], function(i, gene) {
+        d3.select('#' + gene).classed('highlighted_node', true);
+    });
+}
+
+
+function selectNodes(gene_names) {
+    d3.selectAll('.big_line').classed('big_line', false);
+    d3.selectAll('.node circle').attr('r', 4.5);
+
+
+
+    $.each(gene_names, function(i, g) {
+        if (g !== undefined && g !== '') {
+            d3.selectAll('.' + g + '_edge').classed('big_line', true);
+            d3.select('#' + g + ' circle').attr('r', 8.5);
+        }
+    });
+}
+
+function unSelectNodes() {
+    d3.selectAll('.big_line').classed('big_line', false);
+    d3.selectAll('.node circle').attr('r', 4.5);
+
+}
+
+
+var seeds = [];
+
+function getDiseaseSeeds(source, disease) {
+    $.ajax({
+        type: 'POST',
+        data: {
+            source: source,
+            disease: disease
+        },
+        url: '/cgi-bin/api.py/diseaseNetworkSeeds',
+        success: function(result) {
+            seeds = JSON.parse(result);
+            draw_interaction_network2('H. Sapiens', seeds.join(','))
+        }
+    });
+}
+
+
+
+
+function faux_click(selector) {
+    $(selector).click();
+}
+
+function faux_hover_parent_4(selector) {
+    $(selector).parent().parent().parent().parent().trigger('mouseover');
+}
+
+function faux_click_parent_4(selector) {
+    $(selector).parent().parent().parent().parent().click();
+}
+
+function getUrlVars() {
+    var vars = [],
+        hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = decodeURIComponent(hash[1]).split('+').join(' ');
+    }
+    return vars;
+}
+
+
+
+
+var vars;
+
+$(document).ready(function() {
+    console.log('Alive.')
+    vars = getUrlVars()
+    if ('single_query' in vars) {
+        // drawInteractors('H. Sapiens', vars['single_query']);
+        query = vars['single_query'].split(' ').join('').split('+').join('').split(';').join(',').replace('SMAD8', 'SMAD9').replace('smad8', 'SMAD9').replace('Smad8', 'SMAD9');
+        draw_interaction_network2('H. Sapiens', query);
+        $('title').html(query + ' - Interactome INSIDER');
+    }
+    if ('disease' in vars) {
+        setTimeout(function() {
+            selectDisease(vars['source'], vars['disease'], disease_to_index[vars['source'] + '_' + vars['disease']])
+            getEnrichmentNetwork(vars['source'], vars['disease'], disease_to_index[vars['source'] + '_' + vars['disease']])
+        }, 6000)
+    }
+    if ('source' in vars) {
+        getDiseaseSeeds(vars['source'], vars['disease_' + vars['source']])
+        setTimeout(function() {
+            dis_index = disease_to_index[vars['source'] + '_' + vars['disease_' + vars['source']]];
+            getEnrichmentNetwork(vars['source'], vars['disease_' + vars['source']], dis_index);
+        }, 5000)
+    }
+    if ('mutcode' in vars) {
+        mutcode = vars['mutcode'];
+        getDiseaseSeeds(vars['mutcode'], '');
+        setTimeout(function() {
+            dis_index = null;
+            namestring = null;
+            $.each(disease_to_index, function(v, i) {
+                if (v.indexOf(mutcode) === 0) {
+                    dis_index = i;
+                    namestring = v;
+
+                }
+            });
+            source = namestring.split('_')[0]
+            disease = namestring.split('_')[1]
+            getEnrichmentNetwork(source, disease, dis_index);
+        }, 5000)
+    }
+
+    $('#disease_search').on('change keyup keydown', function() {
+        var txt = $(this).val().toUpperCase();
+        $.each($('.disease_name'), function(i, d) {
+            if ($(d).text().indexOf(txt) == -1) {
+                $(d).parent().addClass('hidden_by_search');
+            } else {
+                $(d).parent().removeClass('hidden_by_search');
+            }
+        })
+
+    });
+
+    $('#interaction_search').on('change keyup keydown', function() {
+        var txt = $(this).val().toUpperCase();
+        $.each($('.interactor_item'), function(i, d) {
+            if ($(d).text().indexOf(txt) == -1) {
+                $(d).addClass('hidden_by_search');
+            } else {
+                $(d).removeClass('hidden_by_search');
+            }
+        })
+
+    });
+
+});
+</script>

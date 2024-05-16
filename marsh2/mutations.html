@@ -1,0 +1,293 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/chosen.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src='js/chosen.jquery.min.js'></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170462018-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170462018-1');
+    </script>
+    <title>Mutations - Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.img_container {
+    width: 1366px;
+    height: 320px;
+    border-bottom: 4px solid #666;
+}
+
+.img_tagline {
+    margin-top: 10px;
+}
+
+.header_panel {
+    width: 340px;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.info_panel {
+    width: 340px;
+    height: 220px;
+    float: left;
+    text-align: justify;
+}
+
+.header_pic {
+    margin-top: 20px;
+}
+
+.info_container {
+    width: 1366px;
+    float: left;
+    height: 190px;
+    background-color: #ff9999;
+    border-bottom: 4px solid #666;
+    overflow: hidden;
+}
+
+.info_link {
+    background-color: #666;
+    border: 3px solid #666;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    position: absolute;
+    bottom: -30;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 200;
+    cursor: pointer;
+    font-size: 12px;
+    /*    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+.main_textarea {
+    height: 500px;
+    width: 500px;
+    background-color: #ddd;
+    border: 2px solid #666;
+    margin: 10px;
+    float: left;
+    margin-top: 50px;
+}
+
+#description {
+    height: 500px;
+    margin-left: 50px;
+    float: left;
+    margin-top: 50px;
+}
+
+#text_desc {
+    width: 500px;
+    text-align: justify;
+    line-height: 8mm;
+}
+
+.big_bad_button {
+    background-color: #FF9999;
+    border: none;
+    height: 20px;
+    float: left;
+    margin: 30px;
+    margin-left: 0;
+    padding: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1mm;
+    color: white;
+    cursor: pointer;
+}
+
+#form_data {
+    height: 500px;
+    margin-left: 150px;
+    float: left;
+    margin-top: 50px;
+    width: 500px;
+}
+
+a {
+    color: #FF9999;
+    font-weight: 500;
+}
+
+.text_bar_input {
+    width: 300px;
+    height: 30px;
+    padding-left:10px;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+</style>
+
+<body>
+    <div class='main' style='width:1366px;height:768px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='/'>
+                <img src='img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER </h1></a>
+            <a class='header_link' target='_blank' href='/about.html'> About </a>
+            <a class='header_link' target='_blank' href='/downloads.html'> Downloads </a>
+            <a class='header_link' href='/'> Home </a>
+        </header>
+        <div id='description'>
+            <h2> Customized Mutation Group </h2>
+            <div id='text_desc'>
+                Upload your own text file with amino-acid level mutations to calculate enrichment at protein-protein interaction interfaces across the human interactome. <br><br>
+
+                <b>Uniprot Accession Identifiers are required.</b> <br><br>
+
+                Input one mutation per line, separated by a single space or tab. For example: <br>
+                <pre>
+                P40692 640 P T 
+                P40692 653 L R
+                </pre>
+
+                Please use single-letter notation for Amino-Acids. You can download a sample file <a href='sample.txt' download='sample_mutations.txt'> here</a>.
+                <br>
+                <br>Once you've submitted your set of mutations you will receive a <b> personal mutation code </b>, which will be your unique identifier to access this private set of mutations on our site.
+            </div>
+        </div>
+        <div id='form_data'>
+            <form action='/cgi-bin/mutation_handler.cgi' method='POST' enctype="multipart/form-data">
+                <br>
+                <br>
+                <h3> Disease Group Name (Alphanumerical Only, No Whitespace)</h3>
+                <input class='text_bar_input' type="text" name="disease_group_name" id="disease_group_name" placeholder="AutismMutationsInCohort" required>
+                <br>
+                <br>
+                <br>
+                <h3> Mutation List </h3>
+                <input type="file" name="mutation_file" value="mutation_file" id="mutation_file" accept="text/*" required></input>
+                <br>
+                <br>
+                <br>
+                <h3> Receive a notification when calculations are ready (Optional) </h3>
+                <input class='text_bar_input' type="email" name='email' placeholder='sample@email.com'>
+                <br>
+                <br>
+                <br>
+                <input type='submit' class='big_bad_button' value='Submit Mutation Set'>
+                <br><br><br><br><br><br><h5> Maximum wait time is one hour. If your job takes longer, please email sg2442@cornell.edu </h5>
+            </form>
+        </div>
+</body>
+<script>
+$(document).ready(function() {
+    console.log('Alive.');
+});
+
+$('#disease_group_name').on('change keyup keydown', function() {
+    var txt = $(this).val();
+    $(this).val(/^[A-z0-9]*$/.test(txt) & txt.length < 90 & txt.indexOf('^')===-1 & txt.indexOf('_')===-1 ? txt : txt.substring(0, txt.length - 1));
+});
+</script>

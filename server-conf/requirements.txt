@@ -1,0 +1,8 @@
+numpy
+pandas
+web.py
+biopandas==0.1.4
+scikit-learn
+networkx
+flup==1.0.3.dev20110405
+mysqlclient

@@ -1,0 +1,50 @@
+.main {
+    width: 800px;
+    margin: auto;
+}
+
+.sub_container {
+    height: 800px;
+    color: white;
+    background-color: #333333;
+}
+
+header {
+    height: 80px;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.evidence {
+    float: right;
+    font-size: 10px;
+    padding: 2px;
+    margin: 0;
+    text-decoration: none;
+    pointer-events: none;
+    width: 40px;
+}
+
+.pdb_decorator {
+    background-color: #966B9D;
+    border-color: #966B9D;
+}
+
+.i3d_decorator {
+    background-color: #E08DAC;
+    border-color: #E08DAC;
+}
+
+.zdk_decorator {
+    background-color: #7DE894;
+    border-color: #7DE894;
+}
+
+.eclair_decorator {
+    background-color: #9AC4F8;
+    border-color: #9AC4F8;
+}
+
+canvas {
+    position: relative !important;
+}

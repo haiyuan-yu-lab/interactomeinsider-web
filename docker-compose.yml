@@ -1,0 +1,35 @@
+services:
+  web:
+    build:
+      context: ./server-conf
+    command: /usr/sbin/apache2ctl -D FOREGROUND
+    volumes:
+      - ./server-conf/logs:/app/insider/logs
+      - ./server-conf/interactomeinsider.conf:/etc/apache2/sites-available/interactomeinsider.conf
+      - ./marsh2/:/data/web-vhosts/marsh2/
+    ports:
+      - 80:80
+    networks:
+      - interactomeinsider
+    env_file:
+      - ./env.db.secret
+  db:
+    image: mariadb
+    restart: always
+    env_file:
+      - ./env.db.secret
+    volumes:
+      - ./interactomeinsider-2024-05-15.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/lib/mysql:Z
+    networks:
+      - interactomeinsider
+
+volumes:
+  db-data:
+
+networks:
+  interactomeinsider:
+    name: interactomeinsider
+    external: false
+
+

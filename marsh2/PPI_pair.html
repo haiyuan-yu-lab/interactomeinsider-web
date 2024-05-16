@@ -1,0 +1,1673 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/3Dmol-min.js"></script>
+    <script src="js/drawing.js"></script>
+    <script src="js/api_PPI_pair.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/FileSaver.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170462018-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170462018-1');
+    </script>
+    <title>Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.model_container,
+#gldiv {
+    width: 346px;
+    height: 338px;
+    border-bottom: 4px solid #666;
+    float: left;
+}
+
+#gldiv_A,
+#gldiv_B {
+    width: 304px;
+    height: 169px;
+    float: left;
+}
+
+#gldiv_A {
+    border-bottom: 1px solid #ccc;
+}
+
+#pred_slider_wrapper {
+    height: 338px;
+    width: 40px;
+    background-color: #ccc;
+    float: left;
+    border-right: 2px solid #666;
+}
+
+.pred_button {
+    height: 80px;
+    width: 40px;
+    margin: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border: none;
+    cursor: pointer;
+}
+
+.pred_button:hover {
+    background-color: #aaa;
+}
+
+.pred_button:active,
+.pred_button:focus,
+.pred_button.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.selected_pred_button {
+    background-color: #cab;
+}
+
+.uniprot_container {
+    float: left;
+    width: 1010px;
+    height: 169px;
+    position: relative;
+}
+
+#uniprot_top {
+    border-left: 10px solid #336699;
+    box-shadow: 0 1px 0 0 #666;
+}
+
+#uniprot_bottom {
+    border-left: 10px solid #339933;
+    box-shadow: 0 4px 0 0 #666;
+    margin-bottom: 4px;
+}
+
+.uniprot_link {
+    background-color: #ccc;
+    padding: 4px;
+    color: #666;
+    text-decoration: none;
+    position: absolute;
+    bottom: -14;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 100;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.info_table_container {
+    width: 400px;
+    overflow: hidden;
+    padding: 5px;
+    float: left;
+}
+
+.pinfo_td_label,
+.minfo_td_label {
+    text-align: right;
+    padding-right: 20px;
+    padding-left: 10px;
+    line-height: 5mm;
+}
+
+.pinfo_td,
+.minfo_td {
+    font-weight: 200;
+    line-height: 5mm;
+}
+
+.pinfo_td a,
+.minfo_td a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 400;
+}
+
+.linear_model_container {
+    width: 580px;
+    height: 160px;
+    float: right;
+}
+
+.linear_info_container {
+    width: 580px;
+    height: 60px;
+    float: right;
+}
+
+.knownd3A {
+    fill: #336699;
+}
+
+.knownd3B {
+    fill: #339933;
+}
+
+.bottom_left_panel {
+    float: left;
+    background-color: #ccc;
+    /*border-right: 4px solid #666;*/
+    box-shadow: 4px 0 0 0 #666;
+    width: 648px;
+    height: 350px;
+    border-bottom: 2px solid #ccc;
+}
+
+.bottom_right_panel {
+    float: left;
+    /*background-color: #cab;*/
+    width: 672px;
+    height: 312px;
+    /*border-bottom: 2px solid #cab;*/
+    padding-top: 40px;
+    padding-left: 25px;
+    line-height: 4mm;
+}
+
+.residue_lists_wrapper {
+    background-color: white;
+    width: 346px;
+    height: 100%;
+    float: left;
+}
+
+.residue_wrapper {
+    height: 50%;
+}
+
+.residue_list {
+    overflow: scroll;
+    height: 145px;
+    width: 100%;
+    float: left;
+    background-color: #ddd;
+}
+
+.residue_list::-webkit-scrollbar:vertical {
+    display: block !important;
+    background-color: #ddd;
+    border-left: 1px solid #ccc;
+}
+
+.residue_list::-webkit-scrollbar-thumb {
+    display: block !important;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+}
+
+.residue_header {
+    font-weight: 500;
+    border-bottom: 2px solid #ccc !important;
+    background-color: white !important;
+}
+
+#residue_header_B {
+    border-top: 2px solid #ccc;
+}
+
+.residue_row {
+    height: 18px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    background-color: white;
+    cursor: pointer;
+    width: 320px;
+}
+
+.cell {
+    float: left;
+    width: 45px;
+    text-align: right;
+}
+
+.protein_cell {
+    margin-left: 5px;
+    margin-right: 30px;
+}
+
+.position_cell {
+    width: 40px;
+    margin-right: 30px;
+}
+
+.aminoacid_cell {
+    width: 85px;
+    text-align: center;
+}
+
+.interface_cell {
+    float: right;
+    width: 80px;
+    margin-right: 5px;
+}
+
+.blue_residue {
+    color: #336699;
+    font-weight: 200;
+}
+
+.green_residue {
+    color: #339933;
+    font-weight: 200;
+}
+
+.hidden {
+    display: none !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.bio_oval {
+    width: 69px;
+    height: 20px;
+    padding-left: 3px;
+    float: left;
+    border-radius: 100px;
+    background-color: #eee;
+    font-size: 10px;
+    text-align: center;
+    margin-left: 4px;
+    margin-top: -5px;
+}
+
+.delta_oval {
+    width: 69px;
+    height: 10px;
+    padding-left: 3px;
+    float: left;
+    font-size: 10px;
+    text-align: center;
+    margin-left: 4px;
+    margin-top: -7px;
+    margin-bottom: 0px;
+}
+
+.small_bio_oval {
+    width: 20px;
+    height: 20px;
+    float: left;
+    border-radius: 100px;
+    background-color: #eee;
+    font-size: 10px;
+    text-align: center;
+    margin-left: 4px;
+    margin-top: -5px;
+    font-weight: 500;
+}
+
+.small_delta_oval {
+    width: 20px;
+    height: 20px;
+    float: left;
+    font-size: 10px;
+    text-align: center;
+    margin-left: 4px;
+    margin-top: -7px;
+    margin-bottom: -10px;
+}
+
+.biophysics_container {
+    float: left;
+    margin-bottom: 12px;
+    margin-left: -4px;
+}
+
+.res_info_panel {
+    float: left;
+    width: 260px;
+    height: 280px;
+    padding: 20px;
+    padding-top: 40px;
+    display: none;
+}
+
+.res_error_panel {
+    float: left;
+    width: 260px;
+    height: 280px;
+    padding: 20px;
+    text-align: center;
+    padding-top: 160px;
+    color: #999;
+}
+
+.resinfo_td_label {
+    color: #333;
+    font-size: 14px;
+    width: 50px;
+    text-align: left;
+    padding-right: 20px;
+}
+
+.resinfo_td {
+    color: #333;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.resinfo_dropdown,
+.resinfo_square,
+.resinfo_div {
+    height: 36px;
+    background-color: #ddd;
+    margin-top: 4px;
+}
+
+.resinfo_div {
+    height: 30px;
+    width: 188px;
+    padding-left: 14px;
+    padding-top: 6px;
+    border: 0;
+    font-weight: 500;
+    font-size: 10px;
+    float: left;
+    color: black;
+}
+
+.resinfo_div_long {
+    height: 60px;
+    background-color: #ddd;
+    margin-top: -10px;
+    width: 223px;
+    padding-left: 14px;
+    padding-top: 6px;
+    padding-right: 6px;
+    border: 0;
+    font-weight: 500;
+    font-size: 11px;
+    float: left;
+    color: black;
+    line-height: 5mm;
+    margin-bottom: 9px;
+}
+
+.resinfo_dropdown {
+    width: 202px;
+    padding-left: 40px;
+    border: 0;
+    font-weight: 500;
+    font-size: 10px;
+    float: left;
+    cursor: pointer;
+}
+
+.resinfo_dropdown {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+}
+
+.resinfo_square {
+    width: 36px;
+    float: left;
+    margin-left: 5px;
+    vertical-align: center;
+    position: relative;
+}
+
+.resinfo_span {
+    position: absolute;
+    top: 9px;
+    left: 7px;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+}
+
+.see_more {
+    width: 244px;
+    -webkit-appearance: none;
+    margin-top: 6px;
+    height: 28px;
+    background-color: #ddd;
+    border: none;
+    font-weight: 500;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.see_more:hover,
+.resinfo_dropdown:hover {
+    background-color: #ddc;
+}
+
+.residue_row:hover {
+    background-color: #eee;
+}
+
+.description_LOR_panel {
+    width: 350px;
+    float: left;
+}
+
+.description {
+    color: black;
+    text-align: justify;
+    hyphens: auto;
+}
+
+#uniprotA_name,
+#uniprotB_name,
+#evidence_name,
+#disease_group_name,
+#db_name {
+    font-weight: 600;
+}
+
+#uniprotA_name {
+    color: #336699;
+}
+
+#uniprotB_name {
+    color: #339933;
+}
+
+#disease_group_name {
+    color: #ff9999;
+}
+
+.LOR_table {
+    margin-top: 20px;
+    font-size: 12px;
+    width: 100%;
+}
+
+.LOR_header {
+    font-size: 12px;
+    text-align: center;
+}
+
+.LOR_cell {
+    font-size: 12px;
+    text-align: center;
+    height: 34px;
+}
+
+.blue_cell {
+    background-color: #99cccc;
+}
+
+.green_cell {
+    background-color: #99cc99;
+}
+
+.gray_cell {
+    background-color: #cccccc;
+}
+
+.disease_list_panel {
+    float: right;
+    width: 300px;
+}
+
+.dis_dropdown {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    width: 85px;
+    height: 22px;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.dis_dropdown_label {
+    position: relative;
+}
+
+.disease_container {
+    margin-top: 5px;
+    height: 228px;
+    width: 316px;
+    overflow: scroll;
+}
+
+.disease_container::-webkit-scrollbar:vertical {
+    display: block !important;
+    background-color: #ddd;
+    border-left: 1px solid #ccc;
+}
+
+.disease_container::-webkit-scrollbar-thumb {
+    display: block !important;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.disease_label,
+.disease_values {
+    background-color: #ccc;
+    font-size: 12px;
+    float: left;
+    margin-top: 2px;
+    height: 28px;
+    padding: 8px;
+}
+
+.disease_label {
+    width: 188px;
+    margin-left: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.disease_label:hover {
+    background-color: #ff9999;
+}
+
+.disease_values {
+    width: 64px;
+    text-align: center;
+    margin-left: 4px;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no_enrichment {
+    padding-top: 100px;
+    text-align: center;
+    background-color: #ccc;
+    color: #666;
+    height: 140px;
+}
+
+.selected_resrow {
+    background-color: #ccc !important;
+    font-weight: 600;
+}
+
+.temp_selected {
+    fill: #FFFF00 !important;
+    opacity: 1.0 !important;
+}
+
+.perm_selected {
+    fill: #FF0000 !important;
+    opacity: 1.0 !important;
+}
+
+.atomic {
+    display: none;
+}
+
+.coatomic {
+    display: none;
+}
+
+.main {
+    opacity: 1.0;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 9999;
+    width: 1000px;
+    background-color: white;
+    border: 2px solid #aaa;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    top: 50%;
+    margin-top: -400px;
+    max-height: 800px;
+    overflow: scroll;
+    border-radius: 2px;
+    /* Half the height */
+}
+
+.overlay_top_bar {
+    width: 100%;
+    background-color: #aaa;
+    height: 30px;
+    border-bottom: none;
+}
+
+.overlay_content {
+    margin: auto;
+    width: 800px;
+    padding: 60px;
+    padding-top: 0px;
+}
+
+.overlay_title {
+    margin-top: 80px;
+}
+
+.overlay_headline {
+    padding: 5px;
+    margin-left: 10px;
+    color: #666;
+    font-weight: 600;
+    float: left;
+}
+
+.overlay table {
+    border: none;
+}
+
+.overlay th {
+    border: none;
+    width: 300px;
+    padding: 5px;
+    text-align: right;
+}
+
+.overlay td {
+    border: 2px solid #666;
+    width: 300px;
+    padding: 5px;
+    text-align: right;
+}
+
+.close_button {
+    color: white;
+    float: right;
+    margin: 3px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.nomodel {
+    margin-top: 80px;
+    cursor: default;
+}
+
+.pvalue {
+    font-size: 10px;
+}
+
+.cocrystal_tagline {
+    position: absolute;
+    bottom: 5;
+    right: 10;
+    text-align: right;
+    z-index: 500;
+}
+
+.A_tagline {
+    position: absolute;
+    top: 5;
+    right: 10;
+    text-align: right;
+    z-index: 500;
+}
+
+.B_tagline {
+    position: absolute;
+    bottom: 5;
+    right: 10;
+    text-align: right;
+    z-index: 500;
+}
+
+.cchangers {
+    position: absolute;
+    top: 120;
+    bottom: 120;
+    width: 24px;
+    background-color: #ccc;
+    z-index: 400;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cchangers:hover {
+    background-color: #ddd;
+}
+
+.achangers {
+    position: absolute;
+    top: 39;
+    width: 24px;
+    background-color: #ccc;
+    z-index: 400;
+    cursor: pointer;
+    text-align: center;
+}
+
+.bchangers {
+    position: absolute;
+    bottom: 39;
+    width: 24px;
+    background-color: #ccc;
+    z-index: 400;
+    cursor: pointer;
+    text-align: center;
+}
+
+.left_changer {
+    left: 0;
+}
+
+.shifted_left_changer {
+    left: 42;
+}
+
+.right_changer {
+    right: 0;
+}
+
+.toggler_chevron {
+    font-size: 29px;
+    line-height: 3;
+    margin-top: 6px;
+    color: #eee;
+}
+
+.super_hide {
+    display: none !important;
+}
+
+.cartoon_button {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    height: 17px;
+    width: 20px;
+    text-align: center;
+    padding-top: 3px;
+}
+
+.top_button {
+    left: 45;
+    top: 5;
+    background-color: #336699;
+}
+
+.bottom_button {
+    left: 45;
+    bottom: 5;
+    background-color: #339933;
+}
+
+.left_button {
+    left: 5;
+    bottom: 5;
+    background-color: #336699;
+}
+
+.right_button {
+    left: 30;
+    bottom: 5;
+    background-color: #339933;
+}
+
+.res_loader {
+    width: 20px;
+    height: 20px;
+}
+
+.bioshift {
+    background-color: #cab;
+    color: white;
+}
+
+.table_na {
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.cluster_link {
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.dataframe {
+    border-collapse: collapse;
+}
+
+.bottom_bar {
+    width: 2000px;
+    float: left
+}
+</style>
+<script>
+// Here be globals!
+
+var isCoCrystal = undefined;
+
+var uniProtA = 'P02649';
+var uniProtB = 'Q9HCJ1';
+var structureA;
+var structureB;
+var structChainA;
+var structChainB;
+var colorA = '#336699';
+var colorB = '#339933';
+
+var colorA_alt2 = 0x99ddff;
+var colorB_alt2 = 0x99ff99;
+
+var colorA_alt = 0x6699bb;
+var colorB_alt = 0x66bb66;
+
+var uniprot_lm = [{}, {}]
+
+var interfaces = {
+    A: [],
+    B: [],
+    MediumA: [],
+    MediumB: [],
+    HighA: [],
+    HighB: [],
+    VeryHighA: [],
+    VeryHighB: [],
+    LowA: [],
+    LowB: []
+};
+
+var verbose_interfaces = {
+    A: [],
+    B: [],
+    MediumA: [],
+    MediumB: [],
+    HighA: [],
+    HighB: [],
+    VeryHighA: [],
+    VeryHighB: [],
+    LowA: [],
+    LowB: []
+};
+
+
+
+var cc_carousel;
+var cc_index;
+var persistent_labelsCC;
+var C_mutex = false;
+
+var glviewerCC;
+var glviewerA;
+var glviewerB;
+
+
+var currentViewType = ['coloredModel', 'coloredModel'];
+
+var current_model_path;
+var current_model_path_A;
+var current_model_path_B;
+
+var persistent_labelsA;
+var persistent_labelsB;
+
+var A_carousel;
+var A_index;
+var B_carousel;
+var B_index;
+var A_mutex = false;
+var B_mutex = false;
+
+var cutoff = 'High';
+var current_disease = undefined;
+var current_source = undefined;
+
+var clusters = {
+    'A': null,
+    'B': null,
+    'CC': null
+}
+</script>
+<script>
+// var interface_toggle = true
+
+function toggleInterface() {
+    // interface_toggle = !interface_toggle;
+    d3.selectAll('.knownd3A').classed('hidden', !d3.selectAll('.knownd3A').classed('hidden'));
+    d3.selectAll('.knownd3B').classed('hidden', !d3.selectAll('.knownd3B').classed('hidden'));
+}
+
+function toggleDomains() {
+    // interface_toggle = !interface_toggle;
+    d3.selectAll('.domain_rect').classed('hidden', !d3.selectAll('.domain_rect').classed('hidden'));
+}
+
+function toggleMutations() {
+    // interface_toggle = !interface_toggle;
+    d3.selectAll('.mutations').classed('hidden', !d3.selectAll('.mutations').classed('hidden'));
+}
+
+function changeDelet() {
+    $('.delet_tile').hide();
+    $('#' + $('#delet_drop').val() + '_value').fadeIn();
+}
+
+var first_lock = false;
+
+function setCutoff(cutoff_selected) {
+    // if (cutoff==cutoff_selected && first_lock){
+    //     return null;
+    // }
+    first_lock = true;
+
+    cutoff = cutoff_selected;
+    cutoff_index = ['0', '0', 'Low', 'Medium', 'High', 'VeryHigh'].indexOf(cutoff)
+
+    $('.pred_button').removeClass('selected_pred_button');
+    $('#pred_button_' + cutoff_selected).addClass('selected_pred_button');
+    drawCurrentView(0);
+    drawCurrentView(1);
+    getEnrichmentRanking();
+    $('.circ').hide();
+
+    $.each([0, 1, 2, 3, 4, 5], function(i, v) {
+        if (v >= cutoff_index) {
+            $(".circ" + v).show();
+        }
+    });
+    activateDisease(current_source, current_disease);
+}
+
+function toggleCartoon(i) {
+    currentViewType[i] = currentViewType[i] == 'coloredModel' ? 'coloredCartoon' : 'coloredModel';
+    drawCurrentView(i)
+}
+
+function toggleCartoon_CC(i) {
+    currentViewType[i] = currentViewType[i] == 'coloredModel' ? 'coloredCartoon' : 'coloredModel';
+    drawCurrentView_CC()
+}
+
+function close_overlay() {
+    $('.overlay').fadeOut();
+    $('.main').css({
+        'opacity': 1.0
+    })
+}
+
+function press_atomic() {
+    if (current_disease === undefined) {
+        alert('Please select a disease to perform clustering calculations on its mutations.')
+        return null;
+    }
+    $('.atomic_button').hide();
+    $('.atomic').html("<img class='res_loader' src='img/loader.gif'/>")
+    $('.atomic').show();
+    if (isCoCrystal) {
+        $('.coatomic').html("<img class='res_loader' src='img/loader.gif'/>")
+        $('.coatomic').show();
+        get_clusters_pair();
+    }
+    get_clusters_single(0);
+    get_clusters_single(1);
+}
+
+function reset_atomic() {
+    $('.atomic_button').show();
+    $('.atomic').hide();
+    if (isCoCrystal) {
+        $('.coatomic').hide();
+    }
+
+}
+
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+
+
+function activateCluster(suffix, headline, protein) {
+    console.log(suffix, headline);
+    c = clusters[suffix]
+    if (c === null) {
+        return null;
+    }
+
+    readout = {};
+    res = clusters[suffix].residues;
+
+    $.each(res, function(i, v) {
+        readout[i] = [];
+        $.each(v, function(j, v2) {
+            if (readout[i].indexOf(v2) == -1) {
+                readout[i].push(parseInt(v2));
+            }
+        });
+        readout[i].sort();
+    });
+
+    file_readout = "Interaction:" + interaction + '\n';
+    file_readout += headline.replace('_break_', '\n').replace('_break_', '\n') + '\n';
+    file_readout += 'Number of Mutations in Cluster: ' + clusters[suffix].n_res + '\n';
+    file_readout += 'p-value of clustering: ' + clusters[suffix].pval + '\n';
+    file_readout += '\n\nProtein\tPosition\tMutation\t@Interface\n';
+
+
+    $.each(readout, function(i, v) {
+        if (protein === null) {
+            p = i === cc_carousel[cc_index].chain_current ? uniProtA : uniProtB;
+        } else {
+            p = protein
+        }
+        $.each(v.filter(onlyUnique), function(j, v2) {
+            $.each($('[id^=residue_' + protein + '_' + v2 + ']'), function(a, b) {
+                file_readout += $.trim($(b).text().replace(' > ', '>')).replace(/  /g, ' ').replace(/ /g, '\t') + '\n';
+            });
+        });
+    });
+
+    var blob = new Blob([file_readout], {
+        type: "text/plain;charset=utf-8"
+    });
+
+    saveAs(blob, "cluster_report.txt");
+
+}
+</script>
+
+<body>
+    <div class='overlay' style='display:none;'>
+        <div class='overlay_top_bar'>
+            <div class='overlay_headline'>
+                <span id='which_uniprot'></span> at Amino Acid <span id='which_pos'></span>
+            </div>
+            <i onclick='close_overlay()' class="fa fa-times close_button" aria-hidden="true"></i>
+        </div>
+        <div class='overlay_content'>
+            <div class='var_over'>
+                <h2 class='overlay_title'> 1000 Genomes </h2>
+                <div id='1000Genomes_container'>
+                </div>
+                <h2 class='overlay_title'> ESP6500 </h2>
+                <div id='ESP_container'>
+                </div>
+                <h2 class='overlay_title'> UniProt </h2>
+                <div id='UniVar_container'>
+                </div>
+            </div>
+            <div class='mut_over'>
+                <h2 class='overlay_title'> Disease Mutations </h2>
+                <div id='dismut_container'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='main' style='width:1366px;height:768px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='/'>
+                <img src='img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER</span> </h1></a>
+            <a class='header_link' target='_blank' href='/about.html'> About </a>
+            <a class='header_link' target='_blank' href='/downloads.html'> Downloads </a>
+            <a class='header_link' href='/'> Home </a>
+        </header>
+        <div class='model_container' style='display:none; position:relative;'>
+            <div class='cc_fade cocrystal_tagline'>Model Index: <span id='cocrystal_title'>Loading, please wait...</span></div>
+            <div class='cc_fade cchangers left_changer' onclick='ccchange("down")'>
+                <i class="fa fa-chevron-left toggler_chevron" aria-hidden="true"></i>
+            </div>
+            <div class='cc_fade cchangers right_changer' onclick='ccchange("up")'>
+                <i class="fa fa-chevron-right toggler_chevron" aria-hidden="true"></i>
+            </div>
+            <div class='cc_fade' id='gldiv' style='position:relative; display:none;'>
+            </div>
+            <div id='pred_slider_wrapper'>
+                <button class='pred_button' id='pred_button_VeryHigh' onclick="setCutoff('VeryHigh')">Very High</button>
+                <button class='pred_button' id='pred_button_High' onclick="setCutoff('High')">High</button>
+                <button class='pred_button' id='pred_button_Medium' onclick="setCutoff('Medium')">Med</button>
+                <button class='pred_button' id='pred_button_Low' onclick="setCutoff('Low')">Low</button>
+            </div>
+            <div class='single_fade achangers shifted_left_changer' onclick='achange("down")'>
+                <i class="fa fa-chevron-left toggler_chevron" aria-hidden="true"></i>
+            </div>
+            <div class='single_fade achangers right_changer' onclick='achange("up")'>
+                <i class="fa fa-chevron-right toggler_chevron" aria-hidden="true"></i>
+            </div>
+            <div class='single_fade A_tagline'>Model Index: <span id='A_title'>Loading, please wait...</span></div>
+            <div id='gldiv_A' style='position:relative'>
+            </div>
+            <div class='single_fade bchangers shifted_left_changer' onclick='bchange("down")'>
+                <i class="fa fa-chevron-left toggler_chevron" aria-hidden="true"></i>
+            </div>
+            <div class='single_fade bchangers right_changer' onclick='bchange("up")'>
+                <i class="fa fa-chevron-right toggler_chevron" aria-hidden="true"></i>
+            </div>
+            <div class='single_fade B_tagline'>Model Index: <span id='B_title'>Loading, please wait...</span></div>
+            <div id='gldiv_B' style='position:relative'>
+            </div>
+            <div class='single_fade cartoon_button top_button' onclick="toggleCartoon(0)" title='Toggle Draw Style'>
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </div>
+            <div class='single_fade cartoon_button bottom_button' onclick="toggleCartoon(1)" title='Toggle Draw Style'>
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </div>
+            <div class='cc_fade cartoon_button left_button' onclick="toggleCartoon_CC(0)" title='Toggle Draw Style'>
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </div>
+            <div class='cc_fade cartoon_button right_button' onclick="toggleCartoon_CC(1)" title='Toggle Draw Style'>
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class='uniprot_container' id='uniprot_top' style='display:none'>
+            <div class='info_table_container'>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="pinfo_td_label"> GENE</td>
+                            <td class="pinfo_td truncate" id="pinfo_gene_A"></td>
+                        </tr>
+                        <tr>
+                            <td class="pinfo_td_label"> PROTEIN</td>
+                            <td class="pinfo_td truncate" id="pinfo_protein_A"></td>
+                        </tr>
+                        <tr>
+                            <td class="pinfo_td_label"> UNIPROT</td>
+                            <td class="pinfo_td" id="pinfo_uniprot_A">
+                                <a href="http://www.uniprot.org/uniprot/P20248" target="_blank"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pinfo_td_label"> LENGTH</td>
+                            <td class="pinfo_td" id="pinfo_length_A"></td>
+                        </tr>
+                        <tr>
+                            <td class="minfo_td_label td_A" id="minfo_sourcetype_A">SOURCE</td>
+                            <td class="minfo_td td_A" id="minfo_source_A"></td>
+                        </tr>
+                        <tr>
+                            <td class="minfo_td_label td_A" id="minfo_idtype_A">STRUCTURE</td>
+                            <td class="minfo_td td_A" id="minfo_id_A">
+                                <a target="_blank" href="http://www.rcsb.org/pdb/explore.do?structureId=2C6T"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="minfo_td_label td_A" id="minfo_chaintype_A">CHAIN</td>
+                            <td class="minfo_td td_A" id="minfo_chain_A"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='linear_model_container' id='linear_model_A'>
+                <svg id='linear_model_A_svg'></svg>
+            </div>
+            <a class='uniprot_link' style='right:596;' onclick='toggleInterface()'> Toggle Interface </a>
+            <a class='uniprot_link' style='right:464;' onclick='toggleMutations()'> Toggle Mutations </a>
+            <a class='uniprot_link' style='right:339;' onclick='toggleDomains()'> Toggle Domains </a>
+            <a class='uniprot_link' style='right:192;' id='dl_link'> Download Interface </a>
+            <a class='uniprot_link' style='right:6;'   id='dl_link_bed'> Download Interface (BED) </a>
+
+        </div>
+        <div class='uniprot_container' id='uniprot_bottom' style='display:none'>
+            <div class='info_table_container'>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="pinfo_td_label"> GENE</td>
+                            <td class="pinfo_td truncate" id="pinfo_gene_B"></td>
+                        </tr>
+                        <tr>
+                            <td class="pinfo_td_label"> PROTEIN</td>
+                            <td class="pinfo_td truncate" id="pinfo_protein_B"></td>
+                        </tr>
+                        <tr>
+                            <td class="pinfo_td_label"> UNIPROT</td>
+                            <td class="pinfo_td" id="pinfo_uniprot_B">
+                                <a href="http://www.uniprot.org/uniprot/P20248" target="_blank"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pinfo_td_label"> LENGTH</td>
+                            <td class="pinfo_td" id="pinfo_length_B"></td>
+                        </tr>
+                        <tr>
+                            <td class="minfo_td_label td_B" id="minfo_sourcetype_B">SOURCE</td>
+                            <td class="minfo_td td_B" id="minfo_source_B"></td>
+                        </tr>
+                        <tr>
+                            <td class="minfo_td_label td_B" id="minfo_idtype_B">STRUCTURE</td>
+                            <td class="minfo_td td_B" id="minfo_id_B">
+                                <a target="_blank" href="http://www.rcsb.org/pdb/explore.do?structureId=2C6T"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="minfo_td_label td_B" id="minfo_chaintype_B">CHAIN</td>
+                            <td class="minfo_td td_B" id="minfo_chain_B"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='linear_model_container' id='linear_model_B'>
+                <svg id='linear_model_B_svg'></svg>
+            </div>
+        </div>
+        <div class='bottom_bar'>
+            <div class='bottom_left_panel' style='display:none'>
+                <div class='residue_lists_wrapper'>
+                    <div class='residue_wrapper'>
+                        <div class='residue_row residue_header' id='residue_header_A'>
+                            <div class='protein_cell cell'>
+                                Protein
+                            </div>
+                            <div class='position_cell cell'>
+                                Position
+                            </div>
+                            <div class='aminoacid_cell cell'>
+                                Amino Acid
+                            </div>
+                            <div class='interface_cell cell'>
+                                @ Interface
+                            </div>
+                        </div>
+                        <div class='residue_list' id='residue_list_A'>
+                        </div>
+                    </div>
+                    <div class='residue_wrapper'>
+                        <div class='residue_row residue_header' id='residue_header_B'>
+                            <div class='protein_cell cell'>
+                                Protein
+                            </div>
+                            <div class='position_cell cell'>
+                                Position
+                            </div>
+                            <div class='aminoacid_cell cell'>
+                                Amino Acid
+                            </div>
+                            <div class='interface_cell cell'>
+                                @ Interface
+                            </div>
+                        </div>
+                        <div class='residue_list' id='residue_list_B'>
+                        </div>
+                    </div>
+                </div>
+                <div class='res_error_panel'>
+                    No Residue Selected
+                </div>
+                <div class='res_info_panel' id='residue_only_panel'>
+                    <div class='biophysics_container'>
+                        <div class='small_bio_oval' id='resovalREF2'>
+                            A
+                        </div>
+                        <div class='bio_oval' id='hydroREF2'>
+                            Hydrophobic
+                        </div>
+                        <div class='bio_oval' id='chargeREF2'>
+                            Negative
+                        </div>
+                        <div class='bio_oval' id='polarREF2'>
+                            Non-Polar
+                        </div>
+                    </div>
+                    <div style='position:relative;margin-top:26px;float:left'>
+                        <div class='resinfo_div_long' id='features'>
+                        </div>
+                        <div class='resinfo_div'>
+                            Found on Protein Surface
+                        </div>
+                        <div class='resinfo_square'>
+                            <span class='resinfo_span' id='sasa_value2'><img class='res_loader' src='img/loader.gif'/></span>
+                        </div>
+                        <div class='resinfo_div'>
+                            Jensen Shannon Divergence
+                        </div>
+                        <div class='resinfo_square'>
+                            <span class='resinfo_span' id='jensen_shannon_value2'><img class='res_loader' src='img/loader.gif'/></span>
+                        </div>
+                        <button class='see_more var_more'> See Population Variants at this Locus</button>
+                        <button class='see_more dis_more'> See Disease Mutations at this Locus</button>
+                    </div>
+                </div>
+                <div class='res_info_panel' id='residue_mut_panel'>
+                    <div class='biophysics_container'>
+                        <div class='small_bio_oval' id='resovalREF'>
+                            A
+                        </div>
+                        <div class='bio_oval' id='hydroREF'>
+                            Hydrophobic
+                        </div>
+                        <div class='bio_oval' id='chargeREF'>
+                            Negative
+                        </div>
+                        <div class='bio_oval' id='polarREF'>
+                            Non-Polar
+                        </div>
+                    </div>
+                    <div class='biophysics_container'>
+                        <div class='small_delta_oval'>
+                            <i class="fa fa-chevron-down" aria-hidden="true" style='color:black'></i>
+                        </div>
+                        <div class='delta_oval'>
+                            <i class="fa fa-chevron-down" aria-hidden="true" style='color:black'></i>
+                        </div>
+                        <div class='delta_oval'>
+                            <i class="fa fa-chevron-down" aria-hidden="true" style='color:black'></i>
+                        </div>
+                        <div class='delta_oval'>
+                            <i class="fa fa-chevron-down" aria-hidden="true" style='color:black'></i>
+                        </div>
+                    </div>
+                    <div class='biophysics_container'>
+                        <div class='small_bio_oval' id='resovalALT'>
+                            A
+                        </div>
+                        <div class='bio_oval' id='hydroALT'>
+                            Hydrophobic
+                        </div>
+                        <div class='bio_oval' id='chargeALT'>
+                            Negative
+                        </div>
+                        <div class='bio_oval' id='polarALT'>
+                            Non-Polar
+                        </div>
+                    </div>
+                    <div style='position:relative;margin-top:26px;float:left'>
+                        <i class="fa fa-caret-down" aria-hidden="true" style='color:black;position:absolute;top:16px;left:16px;pointer-events: none'></i>
+                        <select name="deleteriousness" class='resinfo_dropdown' id='delet_drop' onchange='changeDelet()'>
+                            <option value="pph2">PolyPhen-2 Score</option>
+                            <option value="sift">SIFT Score</option>
+                            <option value="grantham">Grantham Score</option>
+                        </select>
+                        <div class='resinfo_square'>
+                            <span class='resinfo_span delet_tile' style='display:block' id='pph2_value'>0.8</span>
+                            <span class='resinfo_span delet_tile' style='display:none' id='sift_value'>0.7</span>
+                            <span class='resinfo_span delet_tile' style='display:none' id='grantham_value'>0.6</span>
+                        </div>
+                        <div class='resinfo_div'>
+                            Found on Protein Surface
+                        </div>
+                        <div class='resinfo_square'>
+                            <span class='resinfo_span' id='sasa_value'>0.7</span>
+                        </div>
+                        <div class='resinfo_div'>
+                            Jensen Shannon Divergence
+                        </div>
+                        <div class='resinfo_square'>
+                            <span class='resinfo_span' id='jensen_shannon_value'>0.6</span>
+                        </div>
+                        <button class='see_more var_more'> See Population Variants at this Locus</button>
+                        <button class='see_more dis_more'> See Disease Mutations at this Locus</button>
+                    </div>
+                </div>
+            </div>
+            <div class='bottom_right_panel' style='display:none'>
+                <div class='description_LOR_panel'>
+                    <div class='description'>
+                        We detemine the interface residues in the interaction between <span id='uniprotA_name'>P20248</span> and <span id='uniprotB_name'>P46527</span> using <span id='evidence_name'>Co-crystal Structures</span>.<br>
+                        <div class='below_snippet' style='display:none;'>
+                            Below is the interface enrichment, at different spatial resolutions, of mutations from the selected set:
+                            <br>
+                            <br>
+                            <span id='disease_group_name'></span> disease mutations from <span id='db_name'></span>.
+                        </div>
+                    </div>
+                    <div class='LOR_table'>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="LOR_header" style='width:80px'></td>
+                                    <td class="LOR_header" colspan='2' style='width:80px;color:black'>Enrichment of Mutations at this Interface (LOR)</td>
+                                    <td class="LOR_header" rowspan='2' style='width:80px;line-height:4mm;'>Spatial Clustering of Mutations</td>
+                                </tr>
+                                <tr>
+                                    <td class="LOR_header" style='width:80px'></td>
+                                    <td class="LOR_header" style='width:80px'>Domain</td>
+                                    <td class="LOR_header" style='width:80px'>Residue</td>
+                                </tr>
+                                <tr>
+                                    <td height='25px' class="LOR_cell" id='uniProtA_LOR_table' style='background-color:#336699; color:white'></td>
+                                    <td height='25px' class="LOR_cell blue_cell">
+                                        <span id='uniProtA_LOR1'></span> <span id='uniProtA_LOR1_sign'></span><span id='uniProtA_ERR1'></span>
+                                    </td>
+                                    <td height='25px' class="LOR_cell blue_cell">
+                                        <span id='uniProtA_LOR2'></span> <span id='uniProtA_LOR2_sign'></span><span id='uniProtA_ERR2'></span>
+                                    </td>
+                                    <td class="atomic_button" rowspan='3' style='width:80px'>
+                                        <button style='height:105px;font-weight:500;' onclick='press_atomic()'>Run Calculation</button>
+                                    </td>
+                                    <td height='25px' class="LOR_cell blue_cell atomic" id='atomic0'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height='25px' class="LOR_cell" id='uniProtB_LOR_table' style='background-color:#339933; color:white'></td>
+                                    <td height='25px' class="LOR_cell green_cell">
+                                        <span id='uniProtB_LOR1'></span> <span id='uniProtB_LOR1_sign'></span><span id='uniProtB_ERR1'></span></td>
+                                    <td height='25px' class="LOR_cell green_cell">
+                                        <span id='uniProtB_LOR2'></span> <span id='uniProtB_LOR2_sign'></span><span id='uniProtB_ERR2'></span></td>
+                                    <td height='25px' class="LOR_cell green_cell atomic" id='atomic1'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height='25px' class="LOR_cell" id='uniProtAB_LOR_table' style='background-color:#666; color:white'>Interaction</td>
+                                    <td height='25px' class="LOR_cell gray_cell">
+                                        <span id='uniProtAB_LOR1'></span> <span id='uniProtAB_LOR1_sign'></span><span id='uniProtAB_ERR1'></span></td>
+                                    <td height='25px' class="LOR_cell gray_cell">
+                                        <span id='uniProtAB_LOR2'></span> <span id='uniProtAB_LOR2_sign'></span><span id='uniProtAB_ERR2'></span></td>
+                                    <td height='25px' class="LOR_cell gray_cell coatomic">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class='disease_list_panel'>
+                    <div class='LOR_sets_header' style='margin-top:-14px; margin-bottom:10px;'> Interface Enrichment of Disease Mutations for this Interaction </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="dis_dropdown_header" style='width:100px'>Interface</td>
+                                <td class="dis_dropdown_header" style='width:100px'>Scale</td>
+                                <td class="dis_dropdown_header" style='width:100px'>Database</td>
+                            </tr>
+                            <tr>
+                                <td class="dis_dropdown_label">
+                                    <i class="fa fa-caret-down" aria-hidden="true" style='color:black;position:absolute;top:4px;left:10px; pointer-events: none'></i>
+                                    <select class='dis_dropdown' onchange="getEnrichmentRanking()" id="dis_scope" name="">
+                                        <option value="AB" id='Interaction_dropdown'>Both</option>
+                                        <option value="A" id='UniProtA_dropdown'>UniProtA</option>
+                                        <option value="B" id='UniProtB_dropdown'>UniProtB</option>
+                                    </select>
+                                </td>
+                                <td class="dis_dropdown_label">
+                                    <i class="fa fa-caret-down" aria-hidden="true" style='color:black;position:absolute;top:4px;left:10px; pointer-events: none'></i>
+                                    <select class='dis_dropdown' onchange="getEnrichmentRanking()" id="dis_scale" name="">
+                                        <option value="Res">Residue</option>
+                                        <option value="Dom">Domain</option>
+                                    </select>
+                                </td>
+                                <td class="dis_dropdown_label">
+                                    <i class="fa fa-caret-down" aria-hidden="true" style='color:black;position:absolute;top:4px;left:10px; pointer-events: none'></i>
+                                    <select class='dis_dropdown' onchange="getEnrichmentRanking()" id="dis_database" name="">
+                                        <option value="HGMD">HGMD</option>
+                                        <option value="ClinVar">ClinVar</option>
+                                        <option value="COSMIC">COSMIC</option>
+                                        <option id='uploaded_button' value="Uploaded">Uploaded</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class='disease_container'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='res_div_A' style='display:none'>
+    </div>
+    <div id='res_div_B' style='display:none'>
+    </div>
+    <textarea style='display:none' id='pdb_readout'>
+    </textarea>
+</body>
+<script>
+function getUrlVars() {
+    var vars = [],
+        hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+var mutcode = '';
+var isHomoDimer;
+
+$(document).ready(function() {
+    console.log('Alive.')
+    var vars = getUrlVars()
+    if ('interaction' in vars) {
+        var params = vars['interaction'].split('_')
+        uniProtA = params[0];
+        uniProtB = params[1];
+        isHomoDimer = uniProtA == uniProtB;
+        if (isHomoDimer){
+            $('#UniProtB_dropdown').hide();
+        }
+        $('title').html(vars['interaction'] + ' - Interactome INSIDER')
+    }
+
+
+    if (('disease' in vars) && ('source' in vars)) {
+        disease = decodeURIComponent(vars['disease']);
+        source = decodeURIComponent(vars['source']);
+
+        setTimeout(function() {
+            activateDisease(source, disease);
+        }, 5000);
+    }
+
+    if ('mutcode' in vars) {
+        mutcode = vars['mutcode'];
+        $('#uploaded_button').val(vars['mutcode']);
+        if(mutcode.length>=1){ $('#uploaded_button').prop('selected',true);}
+    }
+
+    initialize(uniProtA, uniProtB)
+    getEnrichmentRanking();
+
+
+    setTimeout(function() {
+        $('.model_container').fadeIn();
+    }, 1000);
+    setTimeout(function() {
+        $('#uniprot_top').fadeIn();
+    }, 1000);
+    setTimeout(function() {
+        $('#uniprot_bottom').fadeIn();
+    }, 1000);
+    setTimeout(function() {
+        $('.bottom_left_panel').fadeIn();
+    }, 2500);
+    setTimeout(function() {
+        $('.bottom_right_panel').fadeIn();
+    }, 3000);
+
+
+})
+</script>

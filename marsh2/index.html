@@ -1,0 +1,562 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/chosen.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src='js/chosen.jquery.min.js'></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170462018-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170462018-1');
+    </script>
+    <title>Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.img_container {
+    width: 1366px;
+    height: 320px;
+    border-bottom: 4px solid #666;
+}
+
+.img_tagline {
+    margin-top: 10px;
+}
+
+.header_panel {
+    width: 340px;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.info_panel {
+    width: 340px;
+    height: 220px;
+    float: left;
+    text-align: justify;
+}
+
+.header_pic {
+    margin-top: 20px;
+}
+
+.info_container {
+    width: 1366px;
+    float: left;
+    height: 190px;
+    background-color: #ff9999;
+    border-bottom: 4px solid #666;
+    overflow: hidden;
+}
+
+.info_link {
+    background-color: #666;
+    border: 3px solid #666;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    position: absolute;
+    bottom: -30;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 200;
+    cursor: pointer;
+    font-size: 12px;
+    /*    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+.info_selected {
+    background-color: #ff9999;
+}
+
+.text_panel {
+    width: 240px;
+    height: 120px;
+    background-color: white;
+    margin: auto;
+    margin-top: 30px;
+    font-size: 11px;
+    padding: 10px;
+    border-radius: 1px;
+    line-height: 4mm;
+}
+
+.form_area {
+    width: 1366px;
+    height: 370px;
+    border-bottom: 4px solid #666;
+}
+
+.query_box {
+    width: 455px;
+    height: 150px;
+    float: left;
+    margin-top: 20px;
+}
+
+#gene_search,
+.source_dropdown,
+#source_search,
+#mutcode {
+    border: 2px solid #666;
+    line-height: 7mm;
+    font-weight: 500;
+    font-size: 16px;
+    float: left;
+    padding-left: 5px;
+}
+
+#gene_search {
+    width: 360px;
+}
+
+.source_dropdown_label {
+    position: relative;
+    float: left;
+}
+
+.source_dropdown {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    width: 110px;
+    height: 32px;
+    padding-left: 30px;
+    cursor: pointer;
+    border-right: none;
+}
+
+.chosen-single {
+    float: left;
+    border: 2px solid #666 !important;
+    line-height: 7mm !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    height: 32px !important;
+    border-radius: 0 !important;
+    width: 250px !important;
+}
+
+.chosen-drop,
+.chosen-container {
+    width: 250px !important;
+}
+
+#code_button {
+    height: 32px;
+    width: 320px;
+    background-color: #666;
+    color: white;
+    margin: 0;
+    border: none;
+    float: left;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#code_button:hover {
+    text-decoration: underline;
+}
+
+.GO_BUTTON {
+    width: 100px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #ff9999;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 50px;
+    float: left;
+    cursor: pointer;
+}
+
+.example_button {
+    width: 100px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #ff9999;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 10px;
+    float: left;
+    cursor: pointer;
+}
+
+.img_container,
+.info_container,
+.form_area {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+a {
+    color: #ff9999;
+}
+
+div .logos a {
+    margin-bottom: 0;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(120, 120, 120);
+}
+
+#footer_image1 {
+    width: 80px;
+    height: 80px;
+}
+
+#footer_image2 {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+#footer {
+    right: 5px;
+    bottom: 10px;
+    width: 200px;
+}
+</style>
+<script>
+function focusInfo(className, idName) {
+    $('.' + className).hide()
+    $('#' + idName).fadeIn()
+    $('.info_' + className).removeClass('info_selected');
+    $('#button_' + idName).addClass('info_selected');
+
+}
+
+var test_site = "http://ipinfo.io";
+
+function populate_diseasemenu() {
+    db = $('#s_dropdown').val();
+    $('.selectwraps').hide();
+    $('#' + db + '_wrap').show();
+
+}
+
+function GetMutCode() {
+    mutcode = prompt('Insert Mutation Code', 'MCXXXXXXXX')
+    if (mutcode.length > 1) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                mutcode: mutcode
+            },
+            url: '/cgi-bin/api.py/check_mutcode',
+            success: function(result) {
+                if (result == '0') {
+                    alert('Invalid Mutation Code');
+                } else if (result == '1') {
+                    alert('This disease mutation code is still processing, please try again later');
+                }
+                else if (result == '2') {
+                    window.location = "/PPI_network.html?mutcode=" + mutcode;
+                }
+            }
+        });
+    } 
+}
+
+
+var ex_num = 0;
+var examples = ['PTEN', 'DLG4', 'PTEN;DLG4']
+
+function set_example() {
+    $('#gene_search').val(examples[ex_num]);
+    ex_num = (ex_num + 1) % examples.length;
+}
+</script>
+
+<body>
+    <div class='main' style='width:1366px;height:768px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='/'>
+                <img src='img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER </h1></a>
+            <a class='header_link' target='_blank' href='/about.html'> About </a>
+            <a class='header_link' target='_blank' href='/downloads.html'> Downloads </a>
+            <a class='header_link' href='/'> Home </a>
+        </header>
+        <div class='img_container'>
+            <div class='header_panel'>
+                <img class='header_pic' src="img/cocrystal2.png" width='240'>
+                <h5 class='img_tagline'> Visualize Interface Residues </h5>
+                <a id='button_pdb' onclick="focusInfo('col1', 'pdb')" class='info_link info_col1 info_selected' style='left:40;'> Co-crystals </a>
+                <a id='button_homol' onclick="focusInfo('col1', 'homol')" class='info_link info_col1' style='left:130;'> Homology </a>
+                <a id='button_pred' onclick="focusInfo('col1', 'pred')" class='info_link info_col1' style='left:215;'> Prediction </a>
+            </div>
+            <div class='header_panel'>
+                <img class='header_pic' src="img/uniprots2.svg" width="240">
+                <h5 class='img_tagline'> Explore Disease Mutations </h5>
+                <a id='button_disease' onclick="focusInfo('col2', 'disease')" class='info_link info_col2 info_selected' style='left:50;'> Disease Databases </a>
+                <a id='button_custom' onclick="focusInfo('col2', 'custom')" class='info_link info_col2' style='left:185;'> Customization </a>
+            </div>
+            <div class='header_panel'>
+                <img class='header_pic' src="img/menu3.png" width='240'>
+                <h5 class='img_tagline'> Study Mutation Profiles </h5>
+                <a id='button_populations' onclick="focusInfo('col3', 'populations')" class='info_link info_col3 info_selected' style='left:45;'> Variants </a>
+                <a id='button_delet' onclick="focusInfo('col3', 'delet')" class='info_link info_col3' style='left:118;'> Deleteriousness </a>
+                <a id='button_others' onclick="focusInfo('col3', 'others')" class='info_link info_col3' style='left:235;'> Others </a>
+            </div>
+            <div class='header_panel'>
+                <img class='header_pic' src="img/network2.png" height='240'>
+                <h5 class='img_tagline'> Across the Interactome </h5>
+                <a id='button_sources' onclick="focusInfo('col4', 'sources')" class='info_link info_col4 info_selected' style='left:90;'> Sources </a>
+                <a id='button_organisms' onclick="focusInfo('col4', 'organisms')" class='info_link info_col4' style='left:170;'> Organisms </a>
+            </div>
+        </div>
+        <div class='info_container'>
+            <div class='info_panel'>
+                <div class='text_panel col1' id='pdb'>
+                    Co-crystal structures are the most reliable source of partner-specific interface residue information. We compile all available co-crystal structures from <a href='http://www.rcsb.org/pdb/home/home.do' target='_blank'>the RCSB Protein Data Bank</a>, <b>resolving the interface of 7,135 interactions through their 3D structures.</b>
+                </div>
+                <div class='text_panel col1' id='homol' style='display:none'>
+                    Homology modelling allows us to infer a likely configuration for protein-protein interaction using known homologous structures. We expand our interface residue repository by incorporating homology models via <a href='http://interactome3d.irbbarcelona.org/' target='_blank'>Interactome3D</a> for interactions with no known co-crystal, <b>adding 5,386 interaction interfaces.</b>
+                </div>
+                <div class='text_panel col1' id='pred' style='display:none'>
+                    We train ECLAIR (Ensemble Classifier Learning Algorithm to predict Interface Residues) to predict partner-specific  interaction interfaces using biophysical, conservation, coevolution, structural, and docking features without requiring they all be available. Using ECLAIR, <b>we predict interface residues for all 184,605 remaining interactions.</b>
+                </div>
+            </div>
+            <div class='info_panel'>
+                <div class='text_panel col2' id='disease'>
+                    We compile a collection of more than 56,000 disease-associated mutations from both <a href='http://www.hgmd.cf.ac.uk/ac/index.php' target='_blank'>HGMD</a> and <a href='https://www.ncbi.nlm.nih.gov/clinvar/' target='_blank'>ClinVar</a>, additionally processing more than 1.3 million somatic mutations from <a href='http://cancer.sanger.ac.uk/cosmic' target='_blank'>COSMIC</a>. These mutations can be explored in the context of interface domains, residues, or 3D atomic clustering, providing multi-scale information for genomic studies.
+                </div>
+                <div class='text_panel col2' id='custom' style='display:none'>
+                    Users can submit their own set of mutations to explore enrichment at different protein-protein interaction interfaces. Users who submit their own set will receive a Mutation Code, which they can use to return to the site and explore interface enrichment at a later time.
+                </div>
+            </div>
+            <div class='info_panel'>
+                <div class='text_panel col3' id='populations'>
+                    We compile more than 600,000 Population variants from all populations contained in the <a href='http://www.internationalgenome.org/' target='_blank'>1000 Genomes Project</a>, <a href='http://evs.gs.washington.edu/EVS/' target='_blank'>ESP</a>, and <a href='http://www.uniprot.org/' target='_blank'>UniProt</a>. Users can explore selective pressure in the context of both interface residues and disease mutations. 
+                </div>
+                <div class='text_panel col3' id='delet' style='display:none'>
+                    We provide deleteriousness predictions for each disease mutation by leveraging <a href='http://genetics.bwh.harvard.edu/pph2/' target='_blank'>PolyPhen-2</a>, <a href='http://sift.jcvi.org/' target='_blank'>SIFT</a>, and the <a href='https://ionreporter.thermofisher.com/ionreporter/help/GUID-D9DFB21C-652D-4F95-8132-A0C442F65399.html' target='_blank'>Grantham Score</a> of each amino acid substitution in our databases. These predictors are also available for user-submitted mutation sets.
+                </div>
+                <div class='text_panel col3' id='others' style='display:none'>
+                    Biophysical changes arising from a substitution and its location relative to the surface of the protein are key pieces of information for functional inference. We presented these in addition to
+                    <a href='http://compbio.cs.princeton.edu/conservation/' target='_blank'>Jensen Shannon Divergence</a>, a measurement of amino acid conservation, to further contextualize mutations as they relate to interaction.
+                </div>
+            </div>
+            <div class='info_panel'>
+                <div class='text_panel col4' id='sources'>
+                    We provide interactions from a <a href='http://bmcsystbiol.biomedcentral.com/articles/10.1186/1752-0509-6-92' target='_blank'>curated compilation</a> of high-quality binary protein-protein interactions from 7 interactome resources (<a href="https://thebiogrid.org/" target="_blank">BioGRID</a>,
+                    <a href="http://mint.bio.uniroma2.it/" target="_blank">MINT</a>,
+                    <a href="http://wodaklab.org/iRefWeb/search/index" target="_blank">iRefWeb</a>,
+                    <a href="http://dip.doe-mbi.ucla.edu/dip/Main.cgi" target="_blank">DIP</a>,
+                    <a href="http://www.ebi.ac.uk/intact/" target="_blank">IntAct</a>,
+                    <a href="http://www.hprd.org/" target="_blank">HPRD</a> and,
+                    <a href="http://mips.helmholtz-muenchen.de/proj/ppi/" target="_blank">MIPS</a>). Interactions are filtered both systematically and manually to remove erroneous and low-quality interactions.</p>
+                </div>
+                <div class='text_panel col4' id='organisms' style='display:none'>
+                    Overall we provide interface information for 121,575 experimentally-determined human binary interactions reported in major databases. We also provide downloads for interface information for high-quality binary interactomes in 7 highly studied model organisms: <i>A. thaliana</i>, <i>S. cerevisiae</i>, <i>C. elegans</i>, <i>D. melanogaster</i>, <i>M. musculus</i>, <i>S. pombe</i>, and <i>E. coli</i>.
+                </div>
+            </div>
+        </div>
+        <div class='form_area'>
+            <div class='query_box'>
+                <form action="/PPI_network.html" method="get" accept-charset="utf-8">
+                    <h2 class='query_text'>Search by Gene or Protein Identifier</h2>
+                    <input id='gene_search' type="search" name="single_query" value="" placeholder="  Enter Gene Symbol or UniProt Accession">
+                    <input class='GO_BUTTON' type="submit" name="Tool1" value="GO">
+                </form>
+                <button class='example_button' onclick='set_example()'> Examples </button>
+            </div>
+            <div class='query_box'>
+                <form action="/PPI_network.html" method="get" accept-charset="utf-8">
+                    <h2 class='query_text'>Search by Disease Term</h2>
+                    <div class="source_dropdown_label">
+                        <i class="fa fa-caret-down" aria-hidden="true" style='color:black;position:absolute;top:8px;left:12px; pointer-events: none'></i>
+                        <select class='source_dropdown' name='source' id='s_dropdown' onchange='populate_diseasemenu()'>
+                            <option value="HGMD">HGMD</option>
+                            <option value="ClinVar">ClinVar</option>
+                            <option value="COSMIC">COSMIC</option>
+                        </select>
+                    </div>
+                    <div id='HGMD_wrap' class='selectwraps'>
+                        <select id='HGMDmenu' class='multiselect' id='source_search' tabindex="4" name="disease_HGMD">
+                        </select>
+                    </div>
+                    <div id='ClinVar_wrap' class='selectwraps' style='display:none;'>
+                        <select id='ClinVarmenu' class='multiselect' id='source_search' tabindex="4" name="disease_ClinVar">
+                            <option value="HGMD">ClinVar</option>
+                        </select>
+                    </div>
+                    <div id='COSMIC_wrap' class='selectwraps' style='display:none;'>
+                        <select id='COSMICmenu' class='multiselect' id='source_search' tabindex="4" name="disease_COSMIC">
+                            <option value="HGMD">COSMIC</option>
+                        </select>
+                    </div>
+                    <input class='GO_BUTTON' type="submit" name="Tool2" value="GO">
+                </form>
+            </div>
+            <div class='query_box'>
+                <h2 class='query_text'>Search By Your Own Set of Mutations</h2>
+                <a href='mutations.html'>
+                    <button id='code_button'> Submit your own set of mutations </button>
+                </a>
+                <br>
+                <br>
+                <button id='code_button' onclick='GetMutCode()'> Retrieve Submitted Results</button>
+            </div>
+        </div>
+                <div class="logos" style="float:right;">
+            <div style="width:80px; float:right;margin-left:0px;">
+                <a href="http://wicmb.cornell.edu/" style="float:left;" target="_blank">
+                            <img src="http://gemstone.yulab.org/img/cornell_seal.png" id="footer_image1">
+                        </a>
+            </div>
+            <div style="width:80px;float:right;">
+                <a href="http://www.yulab.org/" style="float:right;" target="_blank">                            <img src="http://gemstone.yulab.org/img/yu_logo.png" id="footer_image2">
+                        </a>
+            </div>
+        </div>
+</body>
+<script>
+function test_ajax() {
+    $.get(test_site, function(r) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                resp: r
+            },
+            url: 'http://localhost/cgi-bin/api.py/test',
+            success: function(result) {
+                console.log('Server Working: ' + result);
+            }
+        });
+    }, "jsonp");
+}
+
+
+$(document).ready(function() {
+    $('#HGMDmenu').load('hgmd.html', function() {
+        $('#HGMDmenu').chosen();
+    });
+    $('#ClinVarmenu').load('clinvar.html', function() {
+        $('#ClinVarmenu').chosen();
+    });
+    $('#COSMICmenu').load('cosmic.html', function() {
+        $('#COSMICmenu').chosen();
+    });
+    $('.img_container').fadeIn('slow');
+    setTimeout(function() {
+        $('.info_container').fadeIn('slow');
+    }, 500)
+    setTimeout(function() {
+        $('.form_area').fadeIn('slow');
+    }, 1000)
+    test_ajax();
+});
+</script>

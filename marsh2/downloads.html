@@ -1,0 +1,468 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/chosen.min.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src='js/chosen.jquery.min.js'></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170462018-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170462018-1');
+    </script>
+    <title>Downloads - Interactome INSIDER</title>
+</head>
+<style>
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26.4px;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+p,
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #666;
+    /* old IE */
+    background-color: #666;
+    /* Modern Browsers */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header_link {
+    background-color: #ccc;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    margin-top: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.img_container {
+    width: 1366px;
+    height: 320px;
+    border-bottom: 4px solid #666;
+}
+
+.img_tagline {
+    margin-top: 10px;
+}
+
+.header_panel {
+    width: 340px;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.info_panel {
+    width: 340px;
+    height: 220px;
+    float: left;
+    text-align: justify;
+}
+
+.header_pic {
+    margin-top: 20px;
+}
+
+.info_container {
+    width: 1366px;
+    float: left;
+    height: 190px;
+    background-color: #ff9999;
+    border-bottom: 4px solid #666;
+    overflow: hidden;
+}
+
+.info_link {
+    background-color: #666;
+    border: 3px solid #666;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    position: absolute;
+    bottom: -30;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 200;
+    cursor: pointer;
+    font-size: 12px;
+    /*    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+.main_textarea {
+    height: 500px;
+    width: 500px;
+    background-color: #ddd;
+    border: 2px solid #666;
+    margin: 10px;
+    float: left;
+    margin-top: 50px;
+}
+
+#description {
+    height: 500px;
+    overflow: scroll;
+    margin-left: 50px;
+    float: left;
+    margin-top: 50px;
+}
+
+#text_desc {
+    width: 500px;
+    text-align: justify;
+    line-height: 8mm;
+}
+
+.big_bad_button {
+    background-color: #FF9999;
+    border: none;
+    height: 20px;
+    float: left;
+    margin: 30px;
+    margin-left: 0;
+    padding: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1mm;
+    color: white;
+    cursor: pointer;
+}
+
+#form_data {
+    height: 500px;
+    margin-left: 150px;
+    float: left;
+    margin-top: 50px;
+    width: 500px;
+}
+
+a {
+    color: #FF9999;
+    font-weight: 500;
+}
+
+.text_bar_input {
+    width: 300px;
+    height: 20px;
+}
+
+#desc {
+    float: left;
+    margin: 5px;
+    width: 650;
+    text-align: justify;
+    margin-left: 90px;
+    font-size: 17px;
+    margin-top: 46px;
+    line-height: 7mm;
+    font-weight: 400;
+}
+
+
+#myInput {
+    background-image: url('/css/searchicon.png');
+    /* Add a search icon to input */
+    background-position: 10px 12px;
+    /* Position the search icon */
+    background-repeat: no-repeat;
+    /* Do not repeat the icon image */
+    width: 700px;
+    /* Full-width */
+    font-size: 16px;
+    /* Increase font-size */
+    padding: 12px 20px 12px 40px;
+    /* Add some padding */
+    border: 1px solid #ddd;
+    /* Add a grey border */
+    margin-bottom: 12px;
+    /* Add some space below the input */
+}
+
+#myTable {
+    border-collapse: collapse;
+    /* Collapse borders */
+    width: 100%;
+    /* Full-width */
+    border: 1px solid #ddd;
+    /* Add a grey border */
+    font-size: 14px;
+    /* Increase font-size */
+    margin-bottom: 10px;
+}
+
+#myTable th,
+#myTable td {
+    text-align: left;
+    /* Left-align text */
+    padding: 12px;
+    /* Add padding */
+}
+
+#myTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header,
+#myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #f1f1f1;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#tablediv::-webkit-scrollbar:vertical {
+    display: block !important;
+    background-color: #ddd;
+    border-left: 1px solid #ccc;
+}
+
+#tablediv::-webkit-scrollbar-thumb {
+    display: block !important;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+}
+
+div .logos a {
+    margin-bottom: 0;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(120, 120, 120);
+}
+
+#footer_image1 {
+    width: 80px;
+    height: 80px;
+}
+
+#footer_image2 {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+#footer {
+    right: 5px;
+    bottom: 10px;
+    width: 200px;
+}
+
+</style>
+
+<body>
+    <div class='main' style='width:1366px;height:768px;margin:auto;'>
+        <header style='height:72px; border-bottom:4px solid #666666;'>
+            <a href='/'>
+                <img src='img/miniLogo.png' width='22px' style='float:left; margin-top:30px;'>
+                <h1 style='margin-top:28px;margin-left:10px;float:left;font-weight:400'> Interactome INSIDER </h1></a>
+            <a class='header_link' target='_blank' href='/about.html'> About </a>
+            <a class='header_link' target='_blank' href='/downloads.html'> Downloads </a>
+            <a class='header_link' href='/'> Home </a>
+        </header>
+        <h3 style='padding:20px'>Download files updated February, 2018.</h3>
+        <div style='padding:20px'>
+            <h1> Protein-Level Residue Downloads</h1>
+            <table style='float:left;margin-top:20px;'>
+                <thead>
+                    <tr>
+                        <th style='width:200px'></th>
+                        <th style='width:120px;padding-bottom:10px'>Highest Confidence Interfaces</th>
+                        <th style='width:120px;padding-bottom:10px'>All Interfaces</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>H. sapiens</td>
+                        <td><a download href='downloads/interfacesHQ/H_sapiens_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/H_sapiens_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>A. thaliana</td>
+                        <td><a download href='downloads/interfacesHQ/A_thaliana_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/A_thaliana_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>S. cerevisiae</td>
+                        <td><a download href='downloads/interfacesHQ/S_cerevisiae_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/S_cerevisiae_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>C. elegans</td>
+                        <td><a download href='downloads/interfacesHQ/C_elegans_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/C_elegans_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>D. melanogaster</td>
+                        <td><a download href='downloads/interfacesHQ/D_melanogaster_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/D_melanogaster_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>M. musculus</td>
+                        <td><a download href='downloads/interfacesHQ/M_musculus_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/M_musculus_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>S. pombe</td>
+                        <td><a download href='downloads/interfacesHQ/S_pombe_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/S_pombe_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr style='height:30px;'>
+                        <td style='text-align:right; padding-right:30px;font-style:italic; font-weight:bold'>E. coli</td>
+                        <td><a download href='downloads/interfacesHQ/E_coli_interfacesHQ.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                        <td><a download href='downloads/interfacesALL/E_coli_interfacesALL.txt' target='_blank'>Download <i style='margin-left:5px;' class="fa fa-download fa-lg" aria-hidden="true"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p id='desc'>Download interface residues predicted by ECLAIR for full interactomes, and calculated from PDB structures and homology models, when available.
+                <br>
+                <br>“High Confidence” interfaces include interface residues calculated from PDB structures, homology models, and the “Very High” and “High” interface potential categories from ECLAIR. “Complete” interfaces also include the “Medium” ECLAIR interface potential category.
+            </p>
+            <br>
+            <div style='height:400px;width:100%;display:block'></div>
+        </div>
+        <div>
+            <div id="overlay"></div>
+            <div class='bed_page' style='padding:20px;background-color:#white; border-radius:10px; height:500px; width: 700px; margin-top:40px;'>
+                <h1>Genomic Coordinate Downloads (BED File)</h1>
+                <h3 style='padding:20px'>All BED mappings are now updated to hg38.</h3>
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Gene Name or UniProt...">
+                <div id='tablediv' style='height:400px; overflow:scroll'>
+                    <table id="myTable">
+                    </table>
+                </div>
+            </div>
+            <div class='downloads_page' style='padding:20px;background-color:#white; border-radius:10px; height:200px; margin-top:40px;'>
+                <br><br>
+                <a href='/bed/all.bed' download="all.bed"> Whole Human Interactome Interface BED File (1.1G)</a>
+                <br>
+                <a href='/bed/all.zip' download="all.zip"> Whole Human Interactome Interface BED File (47M) [Zipped]</a>
+            </div>
+        </div>
+        <div class="logos" style="float:right;">
+            <div style="width:80px; float:right;margin-left:0px;">
+                <a href="http://wicmb.cornell.edu/" style="float:left;" target="_blank">
+                    <img src="http://gemstone.yulab.org/img/cornell_seal.png" id="footer_image1">
+                </a>
+            </div>
+            <div style="width:80px;float:right;">
+                <a href="http://www.yulab.org/" style="float:right;" target="_blank">
+                    <img src="http://gemstone.yulab.org/img/yu_logo.png" id="footer_image2">
+                </a>
+            </div>
+        </div>
+</body>
+<script>
+$(document).ready(function() {
+    console.log('Ready.');
+    $("#myTable").load("inner_table_small.html");
+});
+</script>
+<script>
+function myFunction() {
+    // Declare variables 
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        el = tr[i].getElementsByTagName("td");
+        td = el[0]
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+        td = el[1]
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            }
+        }
+    }
+}
+</script>

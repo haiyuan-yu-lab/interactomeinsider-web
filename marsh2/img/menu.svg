@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="2400px" height="2400px" viewBox="0 0 2400 2400" enable-background="new 0 0 2400 2400" xml:space="preserve">
+<rect x="234.849" y="57.647" fill="#D1D3D4" width="1956.796" height="2284.019"/>
+<rect x="437.727" y="894.239" fill="#F1F2F2" width="1321.983" height="262.445"/>
+<rect x="437.727" y="1175.428" fill="#F1F2F2" width="1321.983" height="262.443"/>
+<text transform="matrix(1 0 0 1 699.5 1287.3359)"><tspan x="0" y="0" font-family="'Helvetica'" font-size="71.9892">Jensen-Shannon divergence</tspan><tspan x="0" y="86.387" font-family="'Helvetica'" font-size="71.9892">(Conservation Score)</tspan></text>
+<text transform="matrix(1 0 0 1 699.5 1005.9253)"><tspan x="0" y="0" font-family="'Helvetica'" font-size="71.9892">PolyPhen-2 Score</tspan><tspan x="0" y="86.387" font-family="'Helvetica'" font-size="71.9892">(Deleteriousness Prediction)</tspan></text>
+<rect x="1779.344" y="894.239" fill="#F1F2F2" width="274.867" height="262.445"/>
+<rect x="1779.344" y="1175.428" fill="#F1F2F2" width="274.867" height="262.443"/>
+<text transform="matrix(1 0 0 1 1862.1855 1051.3042)" font-family="'Helvetica'" font-size="78.5336">0.8</text>
+<text transform="matrix(1 0 0 1 1862.1855 1332.7148)" font-family="'Helvetica'" font-size="78.5336">0.5</text>
+<rect x="444.271" y="1840.465" fill="#F1F2F2" width="1603.394" height="157.068"/>
+<text transform="matrix(1 0 0 1 576.043 1953.5059)" font-family="'Helvetica-Bold'" font-size="78.5336">See Population Variants at this Locus</text>
+<rect x="492.262" y="946.596" fill="#BCBEC0" width="139.614" height="157.065"/>
+<rect x="437.727" y="1456.84" fill="#F1F2F2" width="1321.983" height="262.443"/>
+<text transform="matrix(1 0 0 1 699.5 1568.75)"><tspan x="0" y="0" font-family="'Helvetica'" font-size="71.9892">Solvent-Accesible Surface Area</tspan><tspan x="0" y="86.387" font-family="'Helvetica'" font-size="71.9892">(via PDB Model)</tspan></text>
+<rect x="1779.344" y="1456.84" fill="#F1F2F2" width="274.867" height="262.443"/>
+<text transform="matrix(1 0 0 1 1862.1855 1614.127)" font-family="'Helvetica'" font-size="78.5336">0.2</text>
+<polygon fill="#F1F2F2" points="607.41,985.325 562.072,1063.859 516.733,985.325 "/>
+<rect x="444.271" y="2023.709" fill="#F1F2F2" width="1603.394" height="157.068"/>
+<text transform="matrix(1 0 0 1 589.166 2136.75)" font-family="'Helvetica-Bold'" font-size="78.5336">See Disease Mutation at this Locus</text>
+<path fill="#F1F2F2" d="M550.757,345.307c0-0.57-0.462-1.032-1.032-1.032H447.063c-0.57,0-1.032,0.462-1.032,1.032v102.662
+	c0,0.57,0.462,1.032,1.032,1.032h102.662c0.57,0,1.032-0.462,1.032-1.032V345.307z"/>
+<g>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="453.651" y1="500.578" x2="502.137" y2="546.032"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="543.137" y1="500.578" x2="494.651" y2="546.032"/>
+</g>
+<path fill="#F1F2F2" d="M1057.757,342.338c0-0.587-1.972-1.063-4.403-1.063H615.13c-2.432,0-4.403,0.476-4.403,1.063v105.84
+	c0,0.587,1.971,1.063,4.403,1.063h438.224c2.432,0,4.403-0.476,4.403-1.063V342.338z"/>
+<g>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="789.499" y1="497.578" x2="837.984" y2="543.032"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="878.984" y1="497.578" x2="830.499" y2="543.032"/>
+</g>
+<path fill="#F1F2F2" d="M1549.757,342.338c0-0.587-1.972-1.063-4.403-1.063H1107.13c-2.433,0-4.403,0.476-4.403,1.063v105.84
+	c0,0.587,1.971,1.063,4.403,1.063h438.224c2.432,0,4.403-0.476,4.403-1.063V342.338z"/>
+<g>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="1281.499" y1="497.578" x2="1329.984" y2="543.032"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="1370.984" y1="497.578" x2="1322.499" y2="543.032"/>
+</g>
+<path fill="#F1F2F2" d="M2043.757,343.402c0-0.587-1.972-1.063-4.403-1.063H1601.13c-2.433,0-4.403,0.476-4.403,1.063v105.84
+	c0,0.587,1.971,1.063,4.403,1.063h438.224c2.432,0,4.403-0.476,4.403-1.063V343.402z"/>
+<path fill="#F1F2F2" d="M550.757,593.307c0-0.57-0.462-1.032-1.032-1.032H447.063c-0.57,0-1.032,0.462-1.032,1.032v102.662
+	c0,0.57,0.462,1.032,1.032,1.032h102.662c0.57,0,1.032-0.462,1.032-1.032V593.307z"/>
+<path fill="#F69799" d="M1057.757,590.338c0-0.587-1.972-1.063-4.403-1.063H615.13c-2.432,0-4.403,0.476-4.403,1.063v105.84
+	c0,0.587,1.971,1.063,4.403,1.063h438.224c2.432,0,4.403-0.476,4.403-1.063V590.338z"/>
+<path fill="#F1F2F2" d="M1549.757,590.338c0-0.587-1.972-1.063-4.403-1.063H1107.13c-2.433,0-4.403,0.476-4.403,1.063v105.84
+	c0,0.587,1.971,1.063,4.403,1.063h438.224c2.432,0,4.403-0.476,4.403-1.063V590.338z"/>
+<path fill="#F69799" d="M2043.757,591.402c0-0.587-1.972-1.063-4.403-1.063H1601.13c-2.433,0-4.403,0.476-4.403,1.063v105.84
+	c0,0.587,1.971,1.063,4.403,1.063h438.224c2.432,0,4.403-0.476,4.403-1.063V591.402z"/>
+<g>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="1775.499" y1="499.578" x2="1823.984" y2="545.032"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="1864.984" y1="499.578" x2="1816.499" y2="545.032"/>
+</g>
+<text transform="matrix(1 0 0 1 475 421)" font-family="'MyriadPro-Regular'" font-size="72">A</text>
+<text transform="matrix(1 0 0 1 479 670)" font-family="'MyriadPro-Regular'" font-size="72">S</text>
+<text transform="matrix(1 0 0 1 638 419)" font-family="'MyriadPro-Regular'" font-size="72">Hydrophobic</text>
+<text transform="matrix(1 0 0 1 661.7988 669)" font-family="'MyriadPro-Regular'" font-size="72">Hydrophilic</text>
+<text transform="matrix(1 0 0 1 1215.1465 417)" font-family="'MyriadPro-Regular'" font-size="72">Neutral</text>
+<text transform="matrix(1 0 0 1 1215.1465 667)" font-family="'MyriadPro-Regular'" font-size="72">Neutral</text>
+<text transform="matrix(1 0 0 1 1669.2236 417)" font-family="'MyriadPro-Regular'" font-size="72">Non-Polar</text>
+<text transform="matrix(1 0 0 1 1743.707 667)" font-family="'MyriadPro-Regular'" font-size="72">Polar</text>
+</svg>
