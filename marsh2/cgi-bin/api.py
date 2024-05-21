@@ -64,6 +64,9 @@ urls = (
 )
 
 
+def eprint(*args):
+    print >> sys.stderr, args
+
 def save(ip, action):
     db = web.database(dbn='mysql',
                       host="db",

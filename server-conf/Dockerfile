@@ -15,9 +15,15 @@ RUN apt -y update \
     && apt install -y apache2
 
 COPY ./interactomeinsider.conf /etc/apache2/sites-available/
+RUN a2dismod mpm_event
+RUN a2enmod mpm_prefork
 RUN a2enmod cgi
 RUN a2ensite interactomeinsider
 RUN a2dissite 000-default.conf
+
+RUN echo 'SetEnv MARIADB_DATABASE ${MARIADB_DATABASE}' > /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv MARIADB_USER ${MARIADB_USER}' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv MARIADB_PASSWORD ${MARIADB_PASSWORD}' >> /etc/apache2/conf-enabled/environment.conf
 
 # create app user
 RUN mkdir -p /app
